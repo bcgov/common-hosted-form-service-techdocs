@@ -1,0 +1,112 @@
+{
+  "display": "form",
+  "type": "form",
+  "components": [
+    {
+      "html": "<h3>Placeholder heading 1</h3>",
+      "type": "simplecontent",
+      "label": "Text/Images"
+    },
+    {
+      "label":"Tabs",
+      "type":"tabs",
+      "components":[
+        {
+          "label":"basic fields Tab",
+          "components":[
+            {
+              "label": "Text Field",
+              "type": "simpletextfieldadvanced"
+            },
+            {
+              "label": "Text Area",
+              "type": "simpletextareaadvanced"
+            },
+            {
+              "label": "Date / Time",
+              "type": "simpledatetimeadvanced"
+            }
+          ]
+        },
+        {
+          "label":"layouts tab",
+          "components":[
+            {
+              "type": "panel",
+              "title": "Validation Fields",
+              "components": [
+                {
+                  "label": "Email",
+                  "type": "simpleemailadvanced"
+                },
+                {
+                  "label": "Phone Number",
+                  "type": "simplephonenumberadvanced"
+                },
+                {
+                  "label": "Currency",
+                  "type": "simplecurrencyadvanced"
+                }
+              ]
+            },
+            {
+              "type": "columns",
+              "label":"Columns",
+              "columns": [
+                {
+                  "components": [
+                    {
+                      "label": "Select",
+                      "data": {
+                        "values": [
+                          {
+                            "label": "option 1",
+                            "value": "option1"
+                          },
+                          {
+                            "label": "option 2",
+                            "value": "option2"
+                          }
+                        ]
+                      },
+                      "type": "simpleselectadvanced"
+                    }
+                  ]
+                },
+                {
+                  "components": [
+                    {
+                      "label": "Radio",
+                      "values": [
+                        {
+                          "label": "yes",
+                          "value": "yes",
+                          "shortcut": ""
+                        },
+                        {
+                          "label": "no",
+                          "value": "no",
+                          "shortcut": ""
+                        }
+                      ],
+                      "type": "simpleradioadvanced"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Checkbox",
+      "type": "simplecheckboxadvanced"
+    },
+    {
+      "type": "button",
+      "label": "Submit",
+      "action": "submit"
+    }
+  ]
+}
