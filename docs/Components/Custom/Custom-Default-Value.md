@@ -50,6 +50,13 @@ To make sure all custom defaults are loaded properly you can open your form prev
 ### Form Designer
 ![](images/custom_default_form_preview.png)
 
+### User session variables
+When a user successfully logs into the CHEFS, specific variables are assigned to the user, contributing to their logged-in session. This session concludes under the following circumstances: when the browser window is closed, when the user logs out, or when the user no longer meets the criteria associated with one or more of these session variables.
+
+* Access Token Lifespan: The Access Token Lifespan is set to 5 minutes, representing the maximum duration before an access token expires. Upon each successful login, the user is assigned this access token. To maintain the session, this token is refreshed every 5 minutes by sending an HTTP request to the identity server with a refresh token. The server responds with a new access token for API calls. If, for any reason, the CHEFS frontend/browser fails to refresh this access token within the designated timeframe, the application continues attempting to obtain a new valid token until the SSO Max session duration is reached.
+
+* SSO Session Max: The SSO Session Max is set to 10 hours, representing the maximum duration before a session expires. Tokens and browser sessions are invalidated upon session expiration.
+
 ## Tips
 <!-- **[Back to top](#top)** -->
 
