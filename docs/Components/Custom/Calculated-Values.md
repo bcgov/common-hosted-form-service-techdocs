@@ -8,7 +8,7 @@ Use the advanced field of the control you wish to populate with a calculated val
 <!-- **[Back to top](#top)** -->
 
 > Try a working example<br>
-> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=081d9df3-b601-461b-99e7-a26a46331b0c)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=081d9df3-b601-461b-99e7-a26a46331b0c&sampleParameter=1234567)
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
 > [example_calculated_values_schema.json](../examples/example_calculated_values_schema.json){:download="example_calculated_values_schema.json"}
@@ -54,6 +54,13 @@ You can use this section to create complex calculated values using JavaScript, b
 If you need to know the field name for a field you wish to base a calculated value on, look at the API tab and the Property Name box for the name.
 
 ![](images/conditional_property_name.png)
+
+### Capture query parameter
+To automatically populate a form field with query parameters attached to the URL, go to the Data tab, locate and expand the Custom Default Value section. Then, in the JavaScript segment, input the calculation corresponding to the field you intend to exhibit, in our case something similar. 
+
+![](images/query_parameter_javascript.jpg)
+
+One factor to bear in mind is the potential for someone to modify the query parameter in the URL, potentially impersonating a similar value. If this poses a concern, it may be advisable to assign a unique and difficult-to-guess random identifier (such as a UUID) to each parameter. Subsequently, utilize this random identifier within the URL.
 
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
