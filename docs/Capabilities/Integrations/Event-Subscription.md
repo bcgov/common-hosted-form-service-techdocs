@@ -24,7 +24,7 @@ This should add another expandable panel section where Event Subscription parame
     }
     ```
 
-    * Uppublish of a form
+    * unpublish a form
 
     ```
     {
@@ -41,10 +41,10 @@ This should add another expandable panel section where Event Subscription parame
         "subscriptionEvent": "eventFormPublished"
     }
     ```
-* Key - Authentication key passed as part of HTTP header while calling the extenral end point
-* Endpoint Token - Authentication token passed as part of HTTP header while calling the extenral end point
+* Key - Authentication key passed as part of HTTP header while calling the external end point
+* Endpoint Token - Authentication token passed as part of HTTP header while calling the external end point
 
-External application behind that above configured API could then retrieve and process the submission or form events like publish and unpublish of form using the [CEHFS API's](https://submit.digital.gov.bc.ca/app/api/v1/docs). External application can get access to any of their form's data by [geenrating API Keys.](https://developer.gov.bc.ca/docs/default/component/ABCD-techdocs/Capabilities/Data-Management/Generating-API-keys/) 
+External application behind that above configured API could then retrieve and process the submission or form events like publish and unpublish of form using the [CHEFS APIs](https://submit.digital.gov.bc.ca/app/api/v1/docs). External application can get access to any of their form's data by [generating API Keys.](https://developer.gov.bc.ca/docs/default/component/chefs-techdocs/Capabilities/Data-Management/Generating-API-keys/)
 
 
 ***
