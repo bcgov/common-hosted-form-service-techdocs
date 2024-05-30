@@ -18,7 +18,6 @@ CHEFS is on a two week sprint schedule, and this review happens every second spr
 - The `pr-external`, `test`, and `prod` Environments in GitHub have `Required reviewers` in the protection rules that must only be current users
 - The `RoleBindings` in the OpenShift `-tools`, `-dev`, `-test`, and `-prod` environments of the `a12c97` and `a191b5` namespaces must only be for current `User` and `ServiceAccount` subjects
 - SysDig access must only be for current team users (`oc -n a12c97-tools get sysdig-team a12c97-sysdigteam -o yaml`)
-- The SSO environments `dev`, `test`, and `prod` must only contain current users in the groups `Realm Administrator`, `Realm Viewer`, and `operations-team`
 - The [SSO CSS app](https://bcgov.github.io/sso-requests-preview) in the `My Teams` tab must only contain current users in the `CoCo Team`
 <!--
 #### TODO:
@@ -39,9 +38,9 @@ The SoAR section "Assessment", subsection "Vulnerability Management" states:
 CHEFS is on a two week sprint schedule, and this review happens before every sprint planning meeting. In [Red Hat ACS](https://acs.developer.gov.bc.ca) ensure that the top item in the `Images most at risk` has a JIRA item created for it. If not, create a JIRA item in the Backlog using the template:
 
 - _Type_: Task
-- _Title_: ACS Image most at risk: **[IMAGE_NAME]**
-- _Description_:<br>The Red Hat Advanced Cluster Security (ACS) application has identified the image **[IMAGE_NAME]** as being most at risk. To satisfy the requirements outlined in the Security Threat and Risk Assessment's (STRA) Statement of Acceptable Risks (SoAR), this image must be updated to resolve fixable vulnerabilities (or mitigated in some other way, if updating the image is not possible).
-- _Epic Link_: CHEFS DevOps
+- _Title_: ACS Image at risk: **[IMAGE_NAME]**
+- _Description_:<br>The Red Hat Advanced Cluster Security (ACS) application has identified the image **[IMAGE_NAME]** as having vulnerabilities that are fixable. To satisfy the requirements outlined in the Security Threat and Risk Assessment's (STRA) Statement of Acceptable Risks (SoAR), this image must be updated to resolve fixable vulnerabilities (or mitigated in some other way, if updating the image is not possible).
+- _Epic Link_: CHEFS Bugs and Defects
 
 Update the log at the end of this page to show that this step has been completed.
 
@@ -59,7 +58,7 @@ CHEFS is on a two week sprint schedule, and this review happens before every spr
 - _Title_: Dependabot Vulnerability Alert for **[PACKAGE_NAME]** in **[MANIFEST_DIR]**
 - _Description_:<br>The GitHub Dependabot process has created an alert for the **[PACKAGE_NAME]** dependency. To satisfy the requirements outlined in the Security Threat and Risk Assessment's (STRA) Statement of Acceptable Risks (SoAR), this vulnerability must be handled by updating the package version (or mitigated in some other way, if updating the package is not possible).<br>
   ht<workaround>tps://gi</workaround>thub.com/bcgov/common-hosted-form-service/security/dependabot/**[DEPENDABOT_ID]**
-- _Epic Link_: CHEFS DevOps
+- _Epic Link_: CHEFS Bugs and Defects
 
 Update the log at the end of this page to show that this step has been completed.
 
@@ -80,7 +79,7 @@ CHEFS is on a two week sprint schedule, and this review happens before every spr
 - _Description_:<br>The OWASP Zap Scan process has identified a **[VULNERABILITY_RISK_LEVEL]** risk level vulnerability:<br>
   \> **[VULNERABILITY_DESCRIPTION]**<br>
   To satisfy the requirements outlined in the Security Threat and Risk Assessment's (STRA) Statement of Acceptable Risks (SoAR), this vulnerability must be remediated.
-- _Epic Link_: CHEFS DevOps
+- _Epic Link_: CHEFS Bugs and Defects
 
 Update the log at the end of this page to show that this step has been completed.
 
@@ -91,11 +90,12 @@ During sprint planning arrange for the new JIRA item to be included in the sprin
 <!-- NOTE: The log is in reverse order by date (newest at top) -->
 |Date|Access Review|ACS|Dependabot|OWASP Zap Scan|
 |:---:|:---:|:---:|:---:|:---:|
-|2024-04-11|&check;|&check;|&check;|&check;|
-|2024-03-28|&check;|&check;|&check;|&check;|
-|2024-03-14|&check;|&check;|&check;|&check;|
-|2024-02-29|&check;|&check;|&check;|&check;|
-|2024-02-15|&check;|&check;|&check;|&check;|
+|2024-05-30|&check;|&check;|&check;|Broken|
+|2024-04-11|&check;|&check;|&check;|Broken|
+|2024-03-28|&check;|&check;|&check;|Broken|
+|2024-03-14|&check;|&check;|&check;|Broken|
+|2024-02-29|&check;|&check;|&check;|Broken|
+|2024-02-15|&check;|&check;|&check;|Broken|
 |2024-02-01|&check;|&check;|&check;|&check;|
 |2024-01-18|&check;|&check;|&check;|&check;|
 |2024-01-04|&check;|&check;|&check;|&check;|
