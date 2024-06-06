@@ -88,7 +88,8 @@ Do you have a feature request for CHEFS? Post your ideas, leave a comment or vot
 <details>
   <summary><strong>Contact us</strong></summary>
 
-You also can reach out to the CHEFS team directly at [submit.digital@gov.bc.ca](mailto:submit.digital@gov.bc.ca).
+Join in the active discussions happening on our [CHEFS MS Teams Channel](https://teams.microsoft.com/l/channel/19%3A34b9d4b4deb54eebaa9be8bc1ccf02f7%40thread.tacv2/CHEFS%20(Exchange%20Lab%20Team)?groupId=bef8086f-20c7-43a4-bd07-29ce764e818c&tenantId=6fdb5200-3d0d-4a8a-b036-d3685e359adc) or drop by to say hi in our virtual office space on a publicly accessible 
+[Common Components Discord Server](https://discord.com/channels/942948086773321799/943046207872319498). 
 
 </details>
 
