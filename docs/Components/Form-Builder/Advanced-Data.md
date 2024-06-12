@@ -62,7 +62,7 @@ If you require a high volume of columns in your Data Grid, we suggest that you o
 
 ### Examples
 > Try a working example:<br>
-> [View simple example](https://submit.digital.gov.bc.ca/app/form/submit?f=c07fb298-afce-41c5-8f53-8bb838546347)<br>
+> [View simple example](https://submit.digital.gov.bc.ca/app/form/submit?f=b4e1efc5-ee38-4f1e-8190-d4030b47baf0)<br>
 > [View advanced example](https://submit.digital.gov.bc.ca/app/form/submit?f=285efa0d-e3d7-457c-9d34-67a9719cac1c)
 
 > You can also download the example files and [import](Importing-and-exporting-form-designs) it into your design<br>

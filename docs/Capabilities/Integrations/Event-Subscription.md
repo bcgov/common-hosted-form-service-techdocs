@@ -15,7 +15,7 @@ This should add another expandable panel section where Event Subscription parame
 
     * submission of a form, including drafts
    
-   ```  
+   ```
     {
         "formId": "ed5f9b10-xxxx-xxxx-xxxx-a6133236564a",
         "formVersion": "1a62dec9-xxxx-xxxx-xxxx-342a1cc138cd",

@@ -3,7 +3,7 @@
 
 ## Examples
 > Try a working example<br>
-> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=506ccffb-b0c5-49b3-8f8f-8e5f9809e1a5)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=ea72822f-209e-4509-85be-0ab525846969)
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
 > [example_counting_days_between_two_dates_schema.json](../examples/example_counting_days_between_two_dates_schema.json){:download="example_counting_days_between_two_dates_schema.json"}

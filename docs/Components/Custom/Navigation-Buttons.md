@@ -3,7 +3,7 @@
 
 ## Examples
 > Try a working example<br>
-> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=3fe31d91-a802-44a4-8215-03110af26470)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=e0aa0b29-72a9-4268-aff1-5446d0aa7b57)
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
 > [example_navigation_buttons_schema.json](../examples/example_navigation_buttons_schema.json){:download="example_navigation_buttons_schema.json"}

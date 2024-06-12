@@ -3,7 +3,7 @@
 
 ## Examples
 > Try a working example<br>
-> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=296cb105-16f8-4dda-8d49-c83456e51345)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=d4f4a0d6-52f5-445b-a1b3-32cd1f43e72c)
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
 > [example_progress_bar_schema.json]../examples/example_progress_bar_schema.json){:download="example_progress_bar_schema.json"}

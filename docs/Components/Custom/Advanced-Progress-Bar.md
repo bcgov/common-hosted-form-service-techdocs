@@ -3,9 +3,9 @@
 
 ## Examples
 > Try a working example<br>
-> [View Example: Progress Bar with Validation](https://submit.digital.gov.bc.ca/app/form/submit?f=4e702761-c6af-4b10-91d0-0950b964cf4d)
-> [View Example: Progress Bar Using Layout](https://submit.digital.gov.bc.ca/app/form/submit?f=f20ac79e-14a7-464f-8139-f5c5de9133e1)
-> [View Example: Progress Bar Using Layout with Validation](https://submit.digital.gov.bc.ca/app/form/submit?f=ba809aaa-f975-42a8-bc20-8de12c11ec22)
+> [View Example: Progress Bar with Validation](https://submit.digital.gov.bc.ca/app/form/submit?f=e7cb5ddd-1c24-4437-a7fd-85326713013f)
+> [View Example: Progress Bar Using Layout](https://submit.digital.gov.bc.ca/app/form/submit?f=cd5eb16b-1565-419c-bed6-387281c066fc)
+> [View Example: Progress Bar Using Layout with Validation](https://submit.digital.gov.bc.ca/app/form/submit?f=655438f6-40d9-475a-bc4f-bfe76d9a04b3)
 
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
