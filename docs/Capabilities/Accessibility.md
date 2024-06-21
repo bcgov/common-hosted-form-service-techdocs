@@ -12,8 +12,7 @@ We are committed to meeting your needs no matter how you use the service. We und
 ### Tell us how we’re doing
 To tell us about accessibility issues on Submit, you can:
 
-* Reach out to us through our [CHEFS Exchange Lab - Teams Channel](https://teams.microsoft.com/l/channel/19%3a34b9d4b4deb54eebaa9be8bc1ccf02f7%40thread.tacv2/CHEFS%2520(Exchange%2520Lab%2520Team)?groupId=bef8086f-20c7-43a4-bd07-29ce764e818c&tenantId=6fdb5200-3d0d-4a8a-b036-d3685e359adc)   
-* Email us at [submit.digital@gov.bc.ca](mailto:submit.digital@gov.bc.ca)  
+* Reach out to us through our [CHEFS Exchange Lab - Teams Channel](https://teams.microsoft.com/l/channel/19%3a34b9d4b4deb54eebaa9be8bc1ccf02f7%40thread.tacv2/CHEFS%2520(Exchange%2520Lab%2520Team)?groupId=bef8086f-20c7-43a4-bd07-29ce764e818c&tenantId=6fdb5200-3d0d-4a8a-b036-d3685e359adc)
 * Create an issue on our [public GitHub repository](https://github.com/bcgov/common-hosted-form-service/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=)  
 
 We will work with you to:
