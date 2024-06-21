@@ -9,7 +9,7 @@ CHEFS has a lot of different features to help you collect data. Below are some e
 |---|---|---|
 |[Contaminated Sites Services Application Form](https://submit.digital.gov.bc.ca/app/form/submit?f=f003bc9e-0296-4a55-aa43-d8adaf0a022d)|[Conditional forms fields](Conditional-forms-fields), [Repeating data grids](Repeating-data-grids), [Dynamic select lists](Dynamic-Select-Lists), Save As PDF Button||
 
-Is your form taking advantage of CHEFS more advanced features? Or are you using it to collect a lot of different data? If you are interested in sharing your form with the broader community, send us an export of your form and the URL so others can check it out. You can send your files to [submit.digital@gov.bc.ca](mailto:submit.digital@gov.bc.ca).
+Is your form taking advantage of CHEFS more advanced features? Or are you using it to collect a lot of different data? If you are interested in sharing your form with the broader community, send us an export of your form and the URL so others can check it out. You can reach out to us through our [CHEFS Exchange Lab - Teams Channel](https://teams.microsoft.com/l/channel/19%3a34b9d4b4deb54eebaa9be8bc1ccf02f7%40thread.tacv2/CHEFS%2520(Exchange%2520Lab%2520Team)?groupId=bef8086f-20c7-43a4-bd07-29ce764e818c&tenantId=6fdb5200-3d0d-4a8a-b036-d3685e359adc) 
 
 ## Examples of CHEFS features
 

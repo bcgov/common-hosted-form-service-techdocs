@@ -13,7 +13,6 @@ Everything reported by users or by automated systems will be used in our sprint 
 
 | Channel                      | Purpose                       | Source    | Owner #1    | Owner #2     | Owner #3     |
 | ---------------------------- | ----------------------------- | --------- | ----------- | ------------ | ------------ |
-|[submit.digital@gov.bc.ca](mailto:submit.digital@gov.bc.ca)|General comments|Users|[Matthew Hall](https://teams.microsoft.com/l/chat/0/0?users=matthew.hall@gov.bc.ca) |||
 |[Microsoft Teams](https://teams.microsoft.com/l/channel/19%3a34b9d4b4deb54eebaa9be8bc1ccf02f7%40thread.tacv2/CHEFS%2520(Exchange%2520Lab%2520Team)?groupId=bef8086f-20c7-43a4-bd07-29ce764e818c&tenantId=6fdb5200-3d0d-4a8a-b036-d3685e359adc) | General comments | Users | [Walter Moar](https://teams.microsoft.com/l/chat/0/0?users=walter.moar@gov.bc.ca)|||
 |[#common-components](https://chat.developer.gov.bc.ca/channel/common-components)|General comments|Users|[Walter Moar](https://teams.microsoft.com/l/chat/0/0?users=walter.moar@gov.bc.ca)|||
 |[Stack Overflow](https://stackoverflow.developer.gov.bc.ca/)|General comments|Users|[Ayobami Idowu](https://teams.microsoft.com/l/chat/0/0?users=ayobamii.idowu@gov.bc.ca)|||
