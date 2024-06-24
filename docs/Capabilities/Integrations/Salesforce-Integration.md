@@ -40,7 +40,7 @@ You will need this information about your form:
 
 1. **Navigate to:** Setup > External Services
 2. **Click on:** New External Service
-3. On the Select an API Source page, select whether you’re importing an API spec From Mulesoft Anypoint Platform, or From API Specification. Since we're using CEHFS spec here, select From API Specification.
+3. On the Select an API Source page, select whether you’re importing an API spec From Mulesoft Anypoint Platform, or From API Specification. Since we're using CHEFS spec here, select From API Specification.
 4. **Fill in the Details:**
    - **Service Name:** Enter a name for the external service (e.g., "CHEFSAPIService").
    - **Named Credential:** Select the named credential you created earlier i.e. `CHEFSAPICredential`
