@@ -3,7 +3,7 @@
 
 ## Examples
 > Try a working example<br>
-> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=4ee726e0-f7a7-49a1-8454-7325d2593a7d)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=29700227-dbaa-478b-b4c0-e39feeba3f43)
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
 > [example__dynamic_select_lists_schema.json](../examples/example_dynamic_select_lists_schema.json){:download="example_dynamic_select_lists_schema.json"}

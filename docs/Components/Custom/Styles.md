@@ -4,7 +4,7 @@
 ## Working Examples
 
 > Try a working example<br>
-> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=6ff5ba7d-ed8b-433e-a063-162f56627586)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=1a795260-d9b5-44dd-89a8-52d769284df2)
 
 > Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
 > [example_styles_schema.json](../examples/example_styles_schema.json){:download="example_styles_schema.json"}
