@@ -13,6 +13,7 @@
 * [Restoring a deleted submission](Restoring-a-deleted-submission)
 * [Allow multiple draft upload](Allow-multiple-draft-upload)
 * [Multiple people filling out a form together](Creating-Submission-Team)
+* [Wide form layout](Wide-Form-Layout)
 
 ## Notifications
 * [CHEFS Notifications and Reminders](Notifications-and-Reminders)
