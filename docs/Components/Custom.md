@@ -15,6 +15,7 @@
 - [Calculating values with Dates (experimental)](Calculating-Values-with-Dates)  
 - [Custom Default Value (experimental)](Custom-Default-Value)
 - [Custom Validation](Custom-Validation)  
+- [Digital Signature](Digital-signature)
 
 ## Look and Feel
 - [Tooltip for Text Images Component (experimental)](Tooltip-for-Text-Images-Component)  
