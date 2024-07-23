@@ -9,6 +9,8 @@ To reference the Govt of canada [article](https://www.canada.ca/en/government/sy
 - intent to sign
 - agreement to be bound by the contents of the document
 
+Digital signatures can be implemented at various assurance levels based on the types of activities and requirements. Individual program areas should perform their own assessments in the context of their needs and requirements to determine the appropriate assurance level of the digital signature. Some requirements might need two-factor authentication or a secure e-signature, which are not supported by CHEFS.
+
 ## Guidance on implementing good digital signature form
 
 - The signer's identity must be verified.
@@ -33,7 +35,7 @@ The reason or context for the digital signature must be clear. Use various [form
 ## Example
 > This example demonstrates a sample form designed to collect information from a logged-in user. It illustrates how to provide a clear context for the information being gathered, obtain the user's consent, and capture their signature. The form ensures that the user understands the purpose of the data collection and agrees to the terms by providing their signature.  
 > Try a working example<br>
-> [View example](https://chefs-dev.apps.silver.devops.gov.bc.ca/app/form/submit?f=9c75749a-affe-41ee-ab11-ef66e89be9a2)
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=fb3cdf23-4d83-4f94-80f4-78cea5e907cd)
 
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
