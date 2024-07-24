@@ -47,6 +47,22 @@ This is a preconfigured component. Please note that users can only change the 'P
 
 ![image](images/bc-address-preview.png)
 
+## Map Component
+<!-- **[Back to top](#top)** -->
+
+The "Map" component allows for a form designer to show a point or circle on the map for the submitter's reference, or allows for a user to submit one or many points or circles to provide geospatial data for submission. 
+
+![image](images/map-component-1.png)
+
+### Configuration options 
+  - Default Value: Choose what should be displayed on the map once the user loads the form.
+  - Marker Type: Currently the map component supports only submitting a circle of a user's chosen radius or a point signifying a coordinate.
+  - Markers Per Submission: Select how many entries you would like the user to submit.
+  - Zoom Level: Choose how zoomed the map should be initially.
+  - Default Center: You can place a point on the displayed map to select where the map should be centered by default for the submitter.
+  - Read Only: This allows for whatever Default Value you choose to be viewable by the user and not allow for user entry.
+
+![image](images/map-component-edit.png)
 
 <!-- **[Back to top](#top)** -->
 
