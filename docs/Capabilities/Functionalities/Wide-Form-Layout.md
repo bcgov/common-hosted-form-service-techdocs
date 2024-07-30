@@ -1,3 +1,5 @@
+[Home](index) > [Capabilities](Capabilities) > [Functionalities](Functionalities) > **Wide form layout**
+***
 This feature adds the ability to toggle a wider layout, enhancing readability in larger forms. Select 'Wide Form Layout' from the 'Form Functionality' settings to enable this feature when creating a new form. 
 
 ![image](images/Wide-form-layout1.png)
@@ -11,3 +13,6 @@ This option will add a 'Wide Form Layout' button on the form viewer and submissi
 ![image](images/Wide-form-layout3.png)
 
 This feature works by utilizing the maximum amount of white space available and will automatically resize based on the user's screen. Note that the effect will not be noticable if there is not white space available before clicking on the 'Wide Form Layout' button. 
+
+***
+[Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
