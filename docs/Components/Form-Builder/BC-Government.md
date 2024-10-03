@@ -47,6 +47,31 @@ This is a preconfigured component. Please note that users can only change the 'P
 
 ![image](images/bc-address-preview.png)
 
+## Map Component
+<!-- **[Back to top](#top)** -->
+
+The "Map" component allows for a form designer to show a feature on the map for the submitter's reference, or allows for a user to submit one or many features to provide geospatial data for submission. 
+Current features supported include:
+  - Markers: Single Latitude and Longitude points on the map
+  - Circles: Single Latitude and Longitude points with an associated radius
+  - Polygons: A set of Markers which form a closed shape
+
+![image](images/map-component-1.png)
+
+
+### Configuration Options 
+Under the "Data" Tab in the Map Component Settings, there are two subheadings: Default Values, and Submitter Options.
+#### Default Values
+  - Default Value: Choose what should be displayed on the map once the user loads the form.
+  - Zoom Level: Choose how zoomed the map should be initially.
+  - Default Center: You can place a point on the displayed map to select where the map should be centered by default for the submitter.
+#### Submitter Options
+  - Allow submitters to add input on the map: This allows for users to add features to the map.
+  - Marker Type: Currently the map component supports Markers, Circles, and Polygons.  
+  - Markers Per Submission: Select how many entries you would like the user to submit.
+  - Enable Submitter "My Location" button: This button centers the map on the location provided by the user's browser.
+
+![image](images/map-component-edit.png)
 
 <!-- **[Back to top](#top)** -->
 
