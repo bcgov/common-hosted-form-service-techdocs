@@ -1,6 +1,6 @@
 [Home](index) > [Capabilities](Capabilities) > [Functionalities](Functionalities) > **Wide form layout**
 ***
-This feature adds the ability to toggle a wider layout, enhancing readability in larger forms. Select 'Wide Form Layout' from the 'Form Functionality' settings to enable this feature when creating a new form.
+This feature adds the ability to toggle a wider layout, enhancing readability in larger forms. Select 'Wide Form Layout' from the 'Form Functionality' settings to enable this feature when creating a new form. When this is enabled for a form, the submitter, and reviewer views of the form will default to Wide Layout mode. 
 
 ![image](images/wide-form-layout1.png)
 

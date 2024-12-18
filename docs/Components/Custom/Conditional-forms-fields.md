@@ -59,6 +59,41 @@ The "data" variable is the form data object which includes all of the form field
 
 The checkbox component will return a `true` or `false`. There is no need to compare it to a value.
 
+## Conditional Limiting Rows on Edit Grid
+<!-- **[Back to top](#top)** -->
+
+The **Validation** tab of this Edit Grid component allows you to define specific limits and constraints for user inputs. Here’s an explanation of each setting:
+
+1. **Minimum Length**  
+   - Defines the minimum number of characters required for an input field within each row of the Edit Grid.  
+   - If the input is shorter than this value, the validation will fail, and an error message can be displayed.
+
+2. **Maximum Length**  
+   - Sets the upper limit for the number of characters allowed in an input field.  
+   - This ensures that users cannot exceed a specified text length.
+
+![](images/limit-edit-grid.jpg)
+
+### Conditional Add Button with JavaScript
+
+The **Conditional Add Button** setting allows you to control when the “Add Another” button in the Edit Grid component is displayed. It is typically used to impose limits or conditions on adding rows dynamically.
+
+Here’s an example of the logic used to conditionally display the "Add Another" button:
+
+```javascript
+show = (data.editGrid1 ? data.editGrid1.length : 0) + 
+       (data.editGrid2 ? data.editGrid2.length : 0) + 
+       (data.editGrid3 ? data.editGrid3.length : 0) <= 10;
+```
+
+![](images/disable-add-another-button-editgrid.jpg)
+
+
+> Try this example<br>
+> [View example](https://submit.digital.gov.bc.ca/app/form/submit?f=57330dc4-5b8f-40b0-976e-2c22e5452ffc)
+
+> Download this example file and [import](Importing-and-exporting-form-designs) it into your design<br>
+> [example_conditional_edit_grid_row_limits_schema.json](../examples/example_conditional_edit_grid_row_limits_schema.json){:download="example_conditional_edit_grid_row_limits_schema.json"}
 <!-- **[Back to top](#top)** -->
 
 ***
