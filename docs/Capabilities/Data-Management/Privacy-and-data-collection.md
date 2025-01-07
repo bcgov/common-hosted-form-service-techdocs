@@ -11,8 +11,13 @@ It's your responsibility to comply with privacy laws governing the collection, u
 Access to the CHEFS form designer tool does not grant you permission to collect, use or disclose any personal information. Before publishing or distributing your form, you must discuss the intention of the form with your [Ministry Privacy Officer](https://www2.gov.bc.ca/gov/content?id=A749F080FC794D82A2CBD96BABA2ABEC) and complete assessments as required.
 
 We recommend that program areas that create forms complete a Privacy Impact Assessment (PIA). Since each survey and form are unique, it's challenging to capture all the individual components in one overarching PIA. 
+To learn more about Privacy Impact Assessments, refer to the following resources:
 
-* [Find more about Privacy Impact Assessments](https://www2.gov.bc.ca/gov/content?id=CFA561FF833D42B68FDD9A818ECAFFBE)
+* [Guide to Privacy Impact Assessments](https://www2.gov.bc.ca/gov/content?id=CFA561FF833D42B68FDD9A818ECAFFBE)
+
+Since individual program areas are responsible for conducting their PIAs, we’ve provided the Privacy Impact Assessment (PIA) for CHEFS as a reference:
+
+* [Link to CHEFS Privacy Impact Assessment](https://bcgov.sharepoint.com/:b:/r/teams/00003/Shared%20Documents/%F0%9F%92%BB%20General/Common%20Components/Form%20Design%20and%20Submission/PIA/Previous%20Versions/CITZ23007%20-%2022-027%20CHEFS%20-%20PCT%20signed.pdf?csf=1&web=1&e=MUEEea)
 
 ## Surveys and privacy
 <!-- **[Back to top](#top)** -->

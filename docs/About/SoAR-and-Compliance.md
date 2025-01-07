@@ -5,6 +5,10 @@
 
 The Security Threat and Risk Assessment's (STRA) Statement of Acceptable Risks (SoAR) describes how the security of CHEFS is to be maintained. The following procedures are used to stay in compliance with the SoAR.
 
+To learn more about Security Threat and Risk Assessment for CHEFS, refer to the following resources:
+
+* [Link to CHEFS Security Threat and Risk Assessment, Stetement of Acceptable Risks ](https://bcgov.sharepoint.com/:b:/r/teams/00003/Shared%20Documents/%F0%9F%92%BB%20General/Common%20Components/Form%20Design%20and%20Submission/STRA/SOAR%20-%20STRA001064%20%5BSept-11-2023%5D%20%5BCompleted%5D.pdf?csf=1&web=1&e=W9f8Uh)
+
 ## Access Review
 
 The SoAR section "Assessment", subsection "Access Control" states:
