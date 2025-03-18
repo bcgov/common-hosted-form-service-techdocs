@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Disclosure Agreement (NDA)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Non-Disclosure Agreement (NDA)</h1>
+    <p>
+        This is a form for a digital signature with a non-disclosure agreement as the use case. 
+        This form should not be used as is; individuals who are using this form must customize and create 
+        their own form as per their requirements. Some requirements might need two-factor authentication or 
+        secure e-signature, which are not supported by CHEFS.
+    </p>
+
+    <h2>Agreement Date</h2>
+    <p>{d.simpledayadvanced}</p>
+
+    <h2>Disclosing Party Information</h2>
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Full Name</td>
+            <td>{d.disclosingfullName}</td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td>{d.disclosingphonenumber}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{d.disclosingEmail}</td>
+        </tr>
+    </table>
+
+    <h2>Receiving Party Information</h2>
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Full Name</td>
+            <td>{d.receivingfullName}</td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td>{d.receivingPhoneNumber}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{d.receivingEmail}</td>
+        </tr>
+    </table>
+
+    <h2>Confidentiality Agreement</h2>
+    <p>
+        For the purpose of preventing the unauthorized disclosure of Confidential Information as defined below. 
+        The parties agree to enter into a confidential relationship concerning the disclosure of certain proprietary 
+        and confidential information ("Confidential Information").
+    </p>
+
+    <h2>Signatures</h2>
+
+    <h3>Disclosing Party</h3>
+    <p>
+        Signature: <img src="{d.simplesignatureadvanced}" alt="Disclosing Party Signature" style="max-width: 300px;">
+    </p>
+
+    <h3>Receiving Party</h3>
+    <p>
+        Signature: <img src="{d.simplesignatureadvanced1}" alt="Receiving Party Signature" style="max-width: 300px;">
+    </p>
+</body>
+</html>
