@@ -16,6 +16,7 @@
 - [Custom Default Value (experimental)](Custom-Default-Value)
 - [Custom Validation](Custom-Validation)  
 - [Digital Signature](Digital-signature)
+- [Using Signature Component with CDOGS HTML Templates](Signature-outside-form)
 
 ## Look and Feel
 - [Tooltip for Text Images Component (experimental)](Tooltip-for-Text-Images-Component)  
