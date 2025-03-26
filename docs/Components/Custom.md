@@ -22,6 +22,9 @@
 - [Tooltip for Text Images Component (experimental)](Tooltip-for-Text-Images-Component)  
 - [Styles (experimental)](Styles)  
  
+## How to Guides  
+- [How to dynamically collapse and expand panel and other properties](dynamic-panel-collapse-expand)  
+
  ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
 
