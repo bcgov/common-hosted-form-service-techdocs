@@ -77,13 +77,6 @@ The Edit Grid replicates a table-like structure when it comes to the capture and
 
 ![Edit grid](images/edit_grid.png)
 
-## Tree
-<!-- **[Back to top](#top)** -->
-
-A Tree component is very similar to the Edit Grid component. It replicates a table-like, hierarchical structure when it comes to the capture and display of form data. However, in comparison with the Edit Grid, the Tree component creates a tree-like pattern where users can create a number of data branches. There is only one top-level data entry - a root data entry, which is followed by level 1 data branches, which then are followed by level 2 data branches, and so on. Each level is shaded differently to easily decipher the different relationships.
-
-![Tree](images/tree.png)
-
 <!-- **[Back to top](#top)** -->
 
 ***
