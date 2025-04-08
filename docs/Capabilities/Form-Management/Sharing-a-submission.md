@@ -29,5 +29,15 @@ Once the form is submitted, they cannot edit anymore.
 
 ![Add Team Member to your Submission](images/sub-group_manage-2.png)
 
+## Restricting Access to Form Team Members
+
+By selecting the form setting "Share draft with form team members only", draft submissions can only be shared with those users who have been added to the form team.
+
+You will be presented with an error when attempting to add a non-team user.
+
+![Enable Team member sharing](images/team-sharing-setting.png)
+
+![Team member only error](images/team-sharing-warning.png)
+
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
