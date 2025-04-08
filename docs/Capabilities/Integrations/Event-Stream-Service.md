@@ -157,11 +157,15 @@ Since the Form Designer can specify the key, they can use the same key for all o
 
 ## Onboarding
 <a id="onboarding"></a>
-If you are interested in leveraging the Event Stream Service, please fill out the [Event Stream Service request form](https://submit.digital.gov.bc.ca/app/form/submit?f=9c85b764-291a-459e-8b81-a0583d5ea7bc).
 
-Enter your Ministry, Organization or Initiative and add contact emails for yourself and your technical team, as well as an estimated date for promotion to our Production environment (submit.digital.gov.bc.ca). 
+As a prerequisite to onboarding, you will need credentials: an Account Name and a Password. IDIR users can generate credentials [here](https://ess-app.apps.silver.devops.gov.bc.ca/gencreds). You must save the password securely and share it only with your development and/or DevOps team members who require it. Do **NOT** share the password with the Event Stream Service team or the CHEFS team. The password is not recoverable, nor does it persist elsewhere. If it is lost, generate a new set of credentials.
 
-The CHEFS team will create an account in our Development and Test environments so you can test your consumer client and workflows. The credentials will be emailed to you and your technical team. The CHEFS team will **not** retain your password; please follow your privacy and security policies to save your password.
+
+To leverage the Event Stream Service, please fill out the [Event Stream Service request form](https://submit.digital.gov.bc.ca/app/form/submit?f=9c85b764-291a-459e-8b81-a0583d5ea7bc).
+
+Enter your Ministry, Organization, or Initiative and your Account Name. Add contact emails for yourself and your technical team and an estimated date for promotion to our Production environment (submit.digital.gov.bc.ca). The support team will inform you when your account is active in each environment: Development, Test and Production. The same account can be used in all environments.
+
+The account will first be activated in the Development and Test environments so you can test your consumer client and workflows. The credentials will be emailed to you and your technical team. The CHEFS team will **not** retain your password; please follow your privacy and security policies to save your password.
 
 
 
