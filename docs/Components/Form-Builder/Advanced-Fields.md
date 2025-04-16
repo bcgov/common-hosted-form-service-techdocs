@@ -115,8 +115,12 @@ Custom: Provides settings to integrate your own custom map provider.
 **Google Maps:** Set up a Google Map API to utilize Google's location and map technology.
 
 **Manual Mode View String:** Specify the template to be used when querying the view string for component values entered in manual mode. This string is used in the table view, CSV export, and email rendering. When left blank combined value of all components joined with a comma will be used.
+
 </details>
 
+<br/>
+
+A similar component that is custom-built into CHEFS is the [BC Address component](BC-Government#bc-address). It is a Form.io custom component that autocompletes and suggests a list of BC addresses as users type into the field. This component is specifically designed for working with BC geographic data and integrates with the BC Address API.
 
 ## Password
 <!-- **[Back to top](#top)** -->
