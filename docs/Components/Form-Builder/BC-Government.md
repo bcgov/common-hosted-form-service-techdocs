@@ -47,6 +47,8 @@ This is a preconfigured component. Please note that users can only change the 'P
 
 ![image](images/bc-address-preview.png)
 
+A similar component to the BC Address is the - [Advanced Fields – Address Component](Advanced-Fields#address) component, which helps you set up external providers like Google Maps, Azure Maps, OpenStreetMap Nominatim, or even a custom address API. This could be used for global address search.
+
 ## Map Component
 <!-- **[Back to top](#top)** -->
 
