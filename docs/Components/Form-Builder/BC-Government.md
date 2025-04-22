@@ -49,6 +49,15 @@ This is a preconfigured component. Please note that users can only change the 'P
 
 A similar component to the BC Address is the - [Advanced Fields – Address Component](Advanced-Fields#address) component, which helps you set up external providers like Google Maps, Azure Maps, OpenStreetMap Nominatim, or even a custom address API. This could be used for global address search.
 
+## Simple BC Address
+
+Simple BC Address is a simplified version of the BC Address component. It functions identically on the front end, allowing users to search and select addresses using autocomplete. The key difference lies in the data stored with the submission, Simple BC Address captures only essential information, whereas the BC Address component stores a more detailed dataset. You can see this difference when submission data is exported — the Simple BC Address exports fewer fields compared to the BC Address component, which includes more comprehensive location details.
+
+
+This is a preconfigured component. Please note that users can only change the 'Params' details as indicated in the following image. Please visit this link for more information: [Geocoder Developer Toolkit](https://bcgov.github.io/ols-devkit/examples/address_autocomplete.html)
+
+![image](images/simple-bc-address.jpg)
+
 ## Map Component
 <!-- **[Back to top](#top)** -->
 
