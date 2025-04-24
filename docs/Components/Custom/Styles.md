@@ -65,6 +65,49 @@ Example, enter “fa fa-plus” in one of the button icon fields.
 You can add an input icon in front of a field by adding an HTML tag into the “Prefix” field. <I class=”fa fa-phone”></i>.
 ![](images/bs_prefix_suffix.png)
 
+### Spacing
+
+You can add spacing using spacing utility classes. These are highly customizable and help maintain a clean layout.
+
+#### pattern:
+
+`{property}{side}-{size}`
+
+- **property**: `p` (padding) or `m` (margin)
+- **side**:
+  - `t` = top
+  - `b` = bottom
+  - `l` = left
+  - `r` = right
+  - `x` = left and right
+  - `y` = top and bottom
+  - (no letter) = all sides
+- **size**: from `0` (no space) to `5` (max space)
+
+#### Examples
+
+| Class     | Description                        |
+|-----------|------------------------------------|
+| `pb-5`    | Max padding at the bottom          |
+| `px-3`    | Medium padding on left and right   |
+| `my-2`    | Small vertical margin              |
+| `m-0`     | No margin                          |
+| `p-4`     | Large padding on all sides         |
+
+Combine classes to control spacing more precisely:
+
+Example: `mb-3 pt-2`
+
+![](images/bs_spacing.jpg)
+
+#### Applying Classes in CHEFS
+
+1. Select the component you'd like to style from Advanced Layout, fields or data components
+2. Add your spacing classes in the Custom CSS Class field.
+
+Explore all Bootstrap spacing classes in the [Bootstrap Spacing Docs](https://getbootstrap.com/docs/4.0/utilities/spacing/)
+
+Let us know if you'd like help applying these styles to a specific use case!
 
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
