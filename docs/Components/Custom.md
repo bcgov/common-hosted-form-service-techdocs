@@ -20,7 +20,8 @@
 
 ## Look and Feel
 - [Tooltip for Text Images Component (experimental)](Tooltip-for-Text-Images-Component)  
-- [Styles (experimental)](Styles)  
+- [Styles (experimental)](Styles)
+- [Link behaviour and style](Link-Behaviour-and-Style)
  
 ## How to Guides  
 - [How to dynamically collapse and expand panel and other properties](dynamic-panel-collapse-expand)  
