@@ -24,7 +24,7 @@
  
 ## How to Guides  
 - [How to dynamically collapse and expand panel and other properties](dynamic-panel-collapse-expand)  
-
+- [Best Practices for Data Grid Components](Best-practices-data-grid)
  ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
 
