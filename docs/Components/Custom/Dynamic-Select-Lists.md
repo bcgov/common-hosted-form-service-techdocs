@@ -141,6 +141,121 @@ Now that someone filling out the form has selected a colour, we can display the 
 
 Use JavaScript to format data, for example the rgba array can be joined with commas:
 * Data > Calculated Value: `value = data.colourChoice.code.rgba.join() || 'undefined';`
+[//]: # (Cascading Region-Subregion-Facility Dropdown Example)
+
+
+### Cascading Region-Subregion-Facility Dropdown Example
+
+#### Sample Region JSON
+
+Here is a sample JSON structure used in the Region select list. It contains nested subregions and facilities:
+
+```json
+[
+  {
+    "name": "Vancouver Island",
+    "area_km2": 32134,
+    "population": 870000,
+    "subregions": [
+      {
+        "name": "South Island",
+        "climate": "Temperate",
+        "facilities": [
+          {
+            "name": "Royal Jubilee Hospital",
+            "type": "Healthcare",
+            "address": "1952 Bay St, Victoria, BC"
+          },
+          {
+            "name": "University of Victoria",
+            "type": "Education",
+            "address": "3800 Finnerty Rd, Victoria, BC"
+          }
+        ],
+        "major_city": "Victoria"
+      }
+    ]
+  },
+  {
+    "name": "Lower Mainland",
+    "area_km2": 37800,
+    "population": 2800000,
+    "subregions": [
+      {
+        "name": "Metro Vancouver",
+        "climate": "Oceanic",
+        "facilities": [
+          {
+            "name": "Vancouver General Hospital",
+            "type": "Healthcare",
+            "address": "899 W 12th Ave, Vancouver, BC"
+          },
+          {
+            "name": "UBC Main Campus",
+            "type": "Education",
+            "address": "2329 West Mall, Vancouver, BC"
+          }
+        ],
+        "major_city": "Vancouver"
+      }
+    ]
+  },
+  {
+    "name": "Kootenay",
+    "area_km2": 57000,
+    "population": 150000,
+    "subregions": [
+      {
+        "name": "West Kootenay",
+        "climate": "Mountain",
+        "facilities": [
+          {
+            "name": "Kootenay Lake Hospital",
+            "type": "Healthcare",
+            "address": "3 View St, Nelson, BC"
+          },
+          {
+            "name": "Selkirk College",
+            "type": "Education",
+            "address": "301 Frank Beinder Way, Castlegar, BC"
+          }
+        ],
+        "major_city": "Nelson"
+      }
+    ]
+  }
+]
+```
+
+#### How Data Flows Between Select Lists
+
+In this cascading dropdown configuration, each select list passes its selected data to the next through the global `data` object. Here’s how the relationship works:
+
+#### 1. Region Select
+- **Property Name**: `regionData`
+- When a region is selected, its full object (including nested subregions and facilities) is stored as `data.regionData`.
+
+#### 2. Subregion Select
+- Dynamically accesses `data.regionData.subregions`.
+- JavaScript logic ensures this field only loads subregions for the selected region:
+  ```javascript
+  if(data.regionData && data.regionData.subregions){
+    values = JSON.parse(JSON.stringify(data.regionData.subregions));
+  }
+  ```
+
+#### 3. Facility Select
+- Depends on the selected subregion.
+- It uses the subregion’s facilities from `data.subRegion`:
+  ```javascript
+  if(data.subRegion && data.subRegion.facilities){
+    values = JSON.parse(JSON.stringify(data.subRegion.facilities));
+  }
+  ```
+
+This mechanism allows for a seamless cascading experience where each dropdown filters based on the previous selection.
+
+Save and preview the form to see the cascading dropdowns in action.
 
 ### Conditional logic
 Show and hide form fields with [conditional logic](Conditional-forms-fields).

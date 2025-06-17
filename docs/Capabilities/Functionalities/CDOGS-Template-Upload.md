@@ -60,5 +60,72 @@ You may also upload a default template for submitters and reviewers. Once you cr
 
  ![Default Template Print](images/default_print.png)
 
+
+## Finding Field Names to Use in a CDOGS Template
+
+### 🔍 Option 1: Check API Tab in Form Component Configuration
+Go to your Form Component's configuration and find the variable name under the "API" tab for the component you are trying to target.  
+(See Step 2 in the [Sample: write submissions to a .txt file](#sample-write-submissions-to-a-txt-file) section above for a quick example.)
+
+
+### 📁 Option 2: Download Submission JSON
+If the form already has submissions, go to the **Submissions Export** page and download a submission as JSON. The structure here mirrors your `{d...}` mappings very clearly.
+
+> Example:  
+> ```json
+> {
+>     "form": {
+>       "submissionId": "a01d8482-e24b-4b63-9e95-034157c01ac5",
+>       "confirmationId": "A01D8482",
+>       "formName": "Example | Sample form",
+>       "version": 15,
+>       "createdAt": "2025-06-17T04:39:24.691Z",
+>       "fullName": "John Doe",
+>       "username": "JDOE",
+>       "email": "john.doe@example.com",
+>       "submittedAt": "2025-06-17T04:39:24.712Z",
+>       "status": "SUBMITTED",
+>       "assignee": null,
+>       "assigneeEmail": null
+>     },
+>     "lateEntry": false,
+>     "simplefile": [
+>       {
+>         "url": "/app/api/v1/files/sample-file-id",
+>         "data": {
+>           "id": "sample-file-id"
+>         },
+>         "size": 12728,
+>         "storage": "chefs",
+>         "originalName": "example-document.pdf"
+>       }
+>     ],
+>     "simpletextfield": "sample",
+>     "simpleemailadvanced": "test@example.com"
+> }
+> ```
+Then you can use this in your template:
+> ```
+> {d.simplefile[i].originalName}
+> {d.simplefile[i].url}
+> {d.simpletextfield}
+> {d.simpleemailadvanced}
+> {d.form.submissionId}
+> {d.form.confirmationId}
+> {d.form.formName}
+> {d.form.version}
+> {d.form.createdAt}
+> {d.form.fullName}
+> {d.form.username}
+> {d.form.email}
+> {d.form.submittedAt}
+> {d.form.status}
+> ```
+
+### Using Signature Component with CDOGS HTML Templates
+
+**Signature Support:** If you're using the Signature component in your form and you're building an HTML-based CDOGS template, refer to the [Using Signature Component with CDOGS HTML Templates](https://github.com/bcgov/common-document-generation-service/blob/master/app/USAGE.md#signature-component-html-support) section in the CDOGS Templating Wiki for proper usage instructions and syntax.
+
+
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
