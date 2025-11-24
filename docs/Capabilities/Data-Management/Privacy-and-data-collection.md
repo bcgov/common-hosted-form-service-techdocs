@@ -17,7 +17,7 @@ To learn more about Privacy Impact Assessments, refer to the following resources
 
 Since individual program areas are responsible for conducting their PIAs, we’ve provided the Privacy Impact Assessment (PIA) for CHEFS as a reference:
 
-* [Link to CHEFS Privacy Impact Assessment](https://bcgov.sharepoint.com/:b:/r/teams/00003/Shared%20Documents/%F0%9F%92%BB%20General/Common%20Components/Form%20Design%20and%20Submission/PIA/Previous%20Versions/CITZ23007%20-%2022-027%20CHEFS%20-%20PCT%20signed.pdf?csf=1&web=1&e=MUEEea)
+* [Link to CHEFS Privacy Impact Assessment](https://bcgov.sharepoint.com/:b:/r/teams/00003/Shared%20Documents/%F0%9F%92%BB%20General/Common%20Components/6450-80%20System%20Documentation/CHEFS/Compliance/PIA/CITZ23007%20-%2022-027%20CHEFS%20-%20PCT%20signed.pdf?csf=1&web=1&e=kc7vgk)
 
 ## Surveys and privacy
 <!-- **[Back to top](#top)** -->
