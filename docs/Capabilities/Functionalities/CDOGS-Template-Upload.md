@@ -117,16 +117,14 @@ Then you can use this in your template:
 > {d.simplefile[i].url}
 > {d.simpletextfield}
 > {d.simpleemailadvanced}
-> {d.form.submissionId}
-> {d.form.confirmationId}
-> {d.form.formName}
-> {d.form.version}
-> {d.form.createdAt}
-> {d.form.fullName}
-> {d.form.username}
-> {d.form.email}
-> {d.form.submittedAt}
-> {d.form.status}
+> {d.chefs.submissionId}
+> {d.chefs.formVersion}
+> {d.chefs.confirmationId}
+> {d.chefs.createdBy}
+> {d.chefs.updatedBy}
+> {d.chefs.updatedAt}
+> {d.chefs.isDraft}
+> {d.chefs.isDeleted}
 > ```
 
 ### Using Signature Component with CDOGS HTML Templates
