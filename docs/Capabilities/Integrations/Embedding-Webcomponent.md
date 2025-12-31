@@ -155,6 +155,15 @@ The web component provides powerful integration features that let your applicati
 - Secure form access using your current security model (Active Directory, OAuth, etc.)
 - Your application decides what user information to share with CHEFS for form personalization
 
+**Visual Customization & Branding**
+
+- Forms can be completely customized to match your application's visual identity
+- Change colors, fonts, spacing, and styling to align with your brand guidelines
+- Create custom themes that reflect your organization's design system
+- Ensure forms feel like a native part of your application, not an external component
+- Multiple pre-built theme examples available to get started quickly
+- Professional appearance builds user trust and improves completion rates
+
 ---
 
 ## Ready to Get Started?
@@ -1148,9 +1157,201 @@ Although this allows complete customization, the most likely overrides will be f
 
 ### Theming and Styles
 
-- Base viewer styles are scoped to the component. Use `theme-css` or the default theme endpoint to change look/feel.
-- For Shadow DOM, use `:host` and selectors like `:host .formio-form ...` to avoid leaking/breaking global styles.
-- The component injects a small rule so FA icons inherit the button text color (`currentColor`) in Shadow DOM, ensuring spinners are visible.
+The CHEFS Form Viewer web component provides comprehensive theming capabilities that allow you to completely customize the appearance of embedded forms to match your application's design system.
+
+#### Overview
+
+- Base viewer styles are scoped to the component. Use `theme-css` attribute or the default theme endpoint to change look/feel.
+- For Shadow DOM (default), use `:host` and selectors like `:host .formio-form ...` to avoid leaking/breaking global styles.
+- The component injects a small rule so Font Awesome icons inherit the button text color (`currentColor`) in Shadow DOM, ensuring spinners are visible.
+- Theme CSS files are loaded after base styles, allowing complete override of default CHEFS styling.
+
+#### Theme Demo Page
+
+To see theming in action and view different themes with your forms, use the interactive theme demo page:
+
+**Theme Demo**: [`chefs-form-viewer-theme-demo.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-demo.html)
+
+The demo page allows you to:
+
+- Enter your Form ID and API Key
+- Select from available themes (Default, Dark Mode, Material Design)
+- See your form rendered with the selected theme in real-time
+- See how different visual styles affect your form's appearance
+
+This is an excellent tool for:
+
+- Demonstrating customization capabilities to stakeholders
+- Testing theme compatibility with your form's specific components
+
+#### Creating Custom Themes
+
+To create a custom theme for your application, follow these steps:
+
+**1. Start with the Override Template**
+
+Use the provided template file as your starting point: [`chefs-form-viewer-override-template.css`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-override-template.css)
+
+This comprehensive template includes:
+
+- Complete documentation of all customizable CSS classes and selectors
+- Organized sections for different form components (buttons, inputs, cards, etc.)
+- Guidance on Shadow DOM vs Light DOM styling approaches
+- Best practices for using `!important` declarations where needed
+- Examples and placeholders for common customization needs
+
+**2. Review Example Themes**
+
+Study the provided example themes to understand different approaches:
+
+- **Dark Mode Theme**: [`chefs-form-viewer-theme-dark.css`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-dark.css)
+
+  - Futuristic dark theme with neon accents
+  - Demonstrates high-contrast styling and glowing effects
+  - Shows how to override inline styles with `!important`
+  - Example of monospace font usage and angular borders
+
+- **Material Design Theme**: [`chefs-form-viewer-theme-material.css`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-material.css)
+  - Bright, vibrant Material Design-inspired theme
+  - Demonstrates rounded corners, gradients, and smooth animations
+  - Shows modern, playful aesthetic with elevated cards
+  - Example of comprehensive color system and transitions
+
+**3. Customize Your Theme**
+
+Copy the template file and customize it for your brand:
+
+```css
+/* Example: Custom brand colors */
+:host .form-wrapper {
+  background-color: #ffffff !important;
+  border: 2px solid #your-brand-color !important;
+  border-radius: 8px !important;
+}
+
+:host .btn.btn-primary {
+  background-color: #your-brand-color !important;
+  border-color: #your-brand-color !important;
+}
+
+:host .form-control {
+  background-color: #ffffff !important;
+  border-color: #your-border-color !important;
+  border-radius: 4px !important;
+}
+```
+
+**4. Apply Your Theme**
+
+Once your theme CSS file is ready, host it on your server and reference it using the `theme-css` attribute:
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-token"
+  theme-css="https://your-domain.com/path/to/your-theme.css"
+></chefs-form-viewer>
+```
+
+Or programmatically:
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+viewer.themeCss = "https://your-domain.com/path/to/your-theme.css";
+viewer.load();
+```
+
+#### Theme CSS Structure
+
+When creating themes, keep these key points in mind:
+
+**Shadow DOM Styling (Default)**
+
+When using Shadow DOM (default behavior), all selectors must be prefixed with `:host`:
+
+```css
+/* Correct for Shadow DOM */
+:host .form-wrapper {
+  background-color: #ffffff;
+}
+
+:host .btn.btn-primary {
+  background-color: #007bff;
+}
+
+/* Incorrect - won't work in Shadow DOM */
+.form-wrapper {
+  background-color: #ffffff;
+}
+```
+
+**Light DOM Styling (no-shadow mode)**
+
+If you use the `no-shadow` attribute, standard CSS selectors work:
+
+```html
+<chefs-form-viewer no-shadow theme-css="your-theme.css"></chefs-form-viewer>
+```
+
+```css
+/* Works in Light DOM mode */
+.form-wrapper {
+  background-color: #ffffff;
+}
+
+.btn.btn-primary {
+  background-color: #007bff;
+}
+```
+
+**Using !important Declarations**
+
+The template and example themes use `!important` declarations extensively because:
+
+1. **Component Inline Styles**: The component includes inline styles with `!important` that must be overridden
+2. **CHEFS Default Styles**: Base CHEFS CSS may have high specificity
+3. **CSS Variables**: Some properties are controlled by CSS variables that need explicit overrides
+4. **Theme Reliability**: Ensures your theme works consistently across all scenarios
+
+Use `!important` for:
+
+- Background colors (especially `.form-control`)
+- Critical visual properties (colors, borders, shadows)
+- Properties that must override CSS variables
+
+#### Key Customization Points
+
+The most impactful areas to customize:
+
+1. **Form Wrapper** (`.form-wrapper`) - Overall form container appearance
+2. **Form Controls** (`.form-control`) - Input fields, textareas, selects
+3. **Buttons** (`.btn.btn-primary`) - Submit and action buttons
+4. **Cards and Panels** (`.card`, `.card-header`, `.card-body`) - Collapsible sections
+5. **Typography** (`h1`, `h2`, `p`, etc.) - Headings and text
+6. **CSS Variables** (`:host { --bs-primary: ... }`) - Bootstrap/Vuetify theme variables
+
+#### Best Practices
+
+- **Start with the template**: Use the override template as your foundation
+- **Test incrementally**: Make small changes and test frequently
+- **Use the demo page**: Test your theme with the theme demo page before deploying
+- **Consider accessibility**: Ensure sufficient color contrast and readable fonts
+- **Mobile responsive**: Test your theme on different screen sizes
+- **Document your choices**: Note why you made specific styling decisions for future maintenance
+
+#### Theme File Hosting
+
+Your theme CSS file must be:
+
+- Accessible via HTTPS (required for secure contexts)
+- Served with appropriate CORS headers if hosted on a different domain
+- Available as a publicly accessible URL (or accessible to your application's users)
+
+For production, consider:
+
+- Hosting on your CDN for performance
+- Versioning your theme files (e.g., `theme-v1.2.css`) for cache management
+- Using cache headers appropriate for CSS files
 
 ### Prefill and Read-Only
 
@@ -1205,6 +1406,7 @@ Use the interactive code generator at [`chefs-form-viewer-generator.html`](https
 **Demo Pages**
 
 - **Interactive Embed Demo**: [`chefs-form-viewer-embed-demo.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-embed-demo.html) - One-line embedding with URL parameters
+- **Theme Demo**: [`chefs-form-viewer-theme-demo.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-demo.html) - Interactive demonstration of theme overrides for custom look and feel and consistency with your brand. (see [Theming and Styles](#theming-and-styles) for details)
 
 ### Form Metadata Access
 
@@ -1339,5 +1541,10 @@ Standard HTTP status codes:
 ### Getting Help
 
 - **Code Generator**: Use the interactive tool at [`https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-generator.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-generator.html)
-- **Demo Pages**: Test your configuration with [`https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-embed-demo.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-embed-demo.html)
+- **Demo Pages**:
+  - Test your configuration with [`chefs-form-viewer-embed-demo.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-embed-demo.html)
+  - Test themes with [`chefs-form-viewer-theme-demo.html`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-demo.html)
+- **Theme Resources**:
+  - Override template: [`chefs-form-viewer-override-template.css`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-override-template.css)
+  - Example themes: [`chefs-form-viewer-theme-dark.css`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-dark.css), [`chefs-form-viewer-theme-material.css`](https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-theme-material.css)
 - **CHEFS Support**: Contact the CHEFS development team for implementation assistance
