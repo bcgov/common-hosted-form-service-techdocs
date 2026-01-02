@@ -10,6 +10,7 @@
 * [Form Metadata](Form-Metadata)
 * [Salesforce Integration](Salesforce-Integration)
 * [Embed your Form in another Application](Embedding-Webcomponent)
+* [Downloading Submission Files](Downloading-Submission-Files)
 
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
