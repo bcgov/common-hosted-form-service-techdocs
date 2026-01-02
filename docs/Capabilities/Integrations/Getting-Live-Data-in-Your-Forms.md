@@ -473,6 +473,25 @@ If you encounter issues:
 
 ## Best Practices
 
+### Caching external data 
+
+Improve performance by caching external data in a Hidden component that loads once on form initialization.
+
+**How it works:**
+1. Add a Hidden component with JavaScript that fetches data from the external API on form load
+2. Store the response in the Hidden component's value
+3. Reference the cached data from Select or other components throughout your form
+
+**Benefits:**
+- Single API call on form load instead of multiple requests
+- Faster form interactions and reduced latency
+- Lower load on external systems
+- Consistent data across all components
+
+**Use case:** Multiple Select components needing the same department list can all reference one cached dataset instead of each making separate API calls.
+
+**Implementation:** See the JavaScript example in [Advanced Usage: Using Secure Connections with Other Components](#advanced-usage-using-secure-connections-with-other-components), configured in a Hidden component with "Calculate Value" set to execute on form load.
+
 ### Security
 
 - Use API keys for sensitive data
