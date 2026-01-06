@@ -239,16 +239,6 @@ For complete CHEFS API documentation including all available parameters, visit:
 Download or copy the complete Python script below:
 
 ```python
-# --------------------------------------------------------------------------------------------------
-# Author: Laurence Perry
-# Ministry, Division, Branch: EMLI, MCAD, Regional Operations
-# Updated: 2024-04-16
-# Description:
-#    A function to pull responses in JSON form from the Common Hosted Forms (CHEFS) API.
-#    Note that a form ID and API token are required to access the API, this is demonstrated in the
-#    read me in more detail.
-# Modified: 2024-09-06 by Brian Mang
-# --------------------------------------------------------------------------------------------------
 import requests
 import base64
 import logging
