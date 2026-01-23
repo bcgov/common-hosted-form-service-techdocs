@@ -347,6 +347,11 @@ For a complete interactive demo with all available parameters, see: [`chefs-form
 - `theme-css`: Custom theme CSS URL
 - `token`: URL-encoded JSON JWT token object
 - `user`: URL-encoded JSON user object
+- `headers`: URL-encoded JSON headers object (available in Form.io evalContext, can include Authorization header for user tokens)
+- `host-data`: URL-encoded JSON object containing arbitrary host application data (available in Form.io evalContext as `host`)
+- `submit-mode`: Controls how form submission and draft saves are handled (`chefs` (default), `host`, or `none`)
+- `print-button-key`: Form.io component key for the print Action button (default: `print`)
+- `print-event-name`: Form.io Event action name to trigger print (default: `printDocument`)
 - `auto-reload-on-submit`: Automatically reload form as read-only after successful submission (true/false, default: true)
 
 ### Attributes (Configuration)
@@ -366,6 +371,14 @@ For a complete interactive demo with all available parameters, see: [`chefs-form
 - `no-icons` (boolean): do not load Font Awesome (Form.io icon classes won't render).
 - `token` (string): JSON string containing a **parsed token object** for Form.io evalContext (custom JavaScript access). **Warning**: Use parsed token payload only, never raw JWT strings.
 - `user` (string): JSON string containing a user object for Form.io evalContext (custom JavaScript access).
+- `headers` (string): JSON string containing a headers object for Form.io evalContext (custom JavaScript access). Can include `Authorization` header for user tokens from your host application. The Authorization header can be updated programmatically via `refreshUserToken()` for user token management.
+- `host-data` (string): JSON string containing arbitrary host application data that will be available in Form.io's evalContext as `host`. Use this to pass datasets, lookup tables, configuration objects, or any structured data that form components need to access via custom JavaScript (calculated values, conditional logic, default values). Can also be set programmatically via `setHostData()` for dynamic updates after form initialization.
+- `submit-mode` (string): Controls how form submission and draft saves are handled. Options:
+  - `chefs` (default): Normal flow - submits/saves to CHEFS backend after validation.
+  - `host`: After validation, emits `formio:hostSubmit` event for host to handle data. For submissions: automatically displays read-only unless host calls `preventDefault()`. For drafts: no auto read-only display.
+  - `none`: After validation, emits `formio:hostSubmit` but does NOT auto-display read-only. Host is fully responsible for what happens after (both submit and draft).
+- `print-button-key` (string): Form.io component key for the print Action button (default: `print`). The viewer keeps this button enabled even in read-only mode so users can print submitted data.
+- `print-event-name` (string): Form.io Event action name to trigger print (default: `printDocument`).
 - `auto-reload-on-submit` (boolean): When `true` (default), automatically reloads the form as read-only after successful submission, displaying the submitted data. This provides a CHEFS-like confirmation experience. Only applies to final submissions, not draft saves. Set to `false` to disable and handle post-submission behaviour manually.
 
 Boolean attribute semantics: presence, `"true"`, empty string, or `"1"` are treated as true.
@@ -379,6 +392,10 @@ Boolean attribute semantics: presence, `"true"`, empty string, or `"1"` are trea
 - `setSubmission(data)` → Apply data to Form.io instance.
 - `getSubmission()` → Read current submission from the Form.io instance.
 - `refreshAuthToken()` → Manually refresh the authentication token.
+- `refreshUserToken({ token, expiresAt, buffer })` → Update user token (OIDC/OAuth) from host application. Auto-extracts expiry from JWT if `expiresAt` not provided. Configurable expiry notification buffer (default: 60 seconds).
+- `setHostData(data, options)` → Set or update host application data available in Form.io evalContext as `host`. By default, data is shallow-merged with existing hostData. Use `{ replace: true }` to completely replace all existing hostData.
+- `getHostData()` → Returns a shallow copy of current hostData or null if not set.
+- `print(options)` → Programmatically trigger print/PDF generation. Auto-detects submission vs draft based on `submission-id`. If `submission-id` is present, prints the stored submission; otherwise, prints current draft data.
 - `destroy()` → Destroy the Form.io instance and clean up resources.
 
 ## Authentication
@@ -679,6 +696,266 @@ viewer.onBuildAuthHeader = (url) => {
 - **Validate user permissions** before allowing form access
 - **Use the recommended server-to-server architecture** for production applications
 
+## User Token Management
+
+The component supports managing user tokens from your host application separately from the CHEFS API authentication token. This allows you to pass OIDC/OAuth tokens from your identity provider to CHEFS forms for user identification and authorization within form logic.
+
+### Understanding User Tokens vs Auth Tokens
+
+**Auth Token (`auth-token`):**
+- Authenticates the web component's access to CHEFS APIs
+- Sent via `X-Chefs-Gateway-Token` header
+- Managed automatically by the component (auto-refresh)
+- Short-lived JWT from CHEFS backend
+
+**User Token (via `headers` or `refreshUserToken()`):**
+- Represents the authenticated user from your host application
+- Sent via `Authorization` header (e.g., `Authorization: Bearer <user-token>`)
+- Managed by your host application
+- Can be OIDC/OAuth tokens from your identity provider
+- Available in Form.io evalContext for custom JavaScript logic
+
+This separation allows both authentication systems to coexist: your application authenticates users, and CHEFS authenticates form access.
+
+### Setting User Tokens
+
+**Method 1: Initial Setup via Headers Attribute**
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-auth-token"
+  headers='{"Authorization":"Bearer user-token-from-your-idp"}'
+></chefs-form-viewer>
+```
+
+**Method 2: Programmatic Setup (Recommended)**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Set initial user token
+viewer.refreshUserToken({ token: getCurrentUserToken() });
+
+// Or with explicit expiry (for opaque tokens)
+viewer.refreshUserToken({
+  token: opaqueToken,
+  expiresAt: 1234567890, // Unix timestamp
+});
+```
+
+### Automatic Expiry Tracking
+
+When you call `refreshUserToken()` with a JWT token, the component automatically extracts the expiry time from the `exp` claim. For opaque tokens, you must provide the `expiresAt` parameter.
+
+The component will emit `formio:userTokenExpiring` before the token expires (default: 60 seconds before). You can configure this buffer:
+
+```javascript
+viewer.refreshUserToken({
+  token: accessToken,
+  buffer: 120, // Notify 120 seconds before expiry
+});
+```
+
+### Handling Token Expiry
+
+**Listen for Expiry Warning:**
+
+```javascript
+viewer.addEventListener("formio:userTokenExpiring", (e) => {
+  console.log("User token expiring at:", e.detail.expiresAt);
+  
+  // Refresh token from your identity provider
+  refreshUserAccessToken()
+    .then((newToken) => {
+      // Update component with new token
+      viewer.refreshUserToken({ token: newToken });
+    })
+    .catch((error) => {
+      console.error("Failed to refresh user token:", error);
+      // Handle error: redirect to login, show message, etc.
+    });
+});
+```
+
+**Listen for Token Updates:**
+
+```javascript
+viewer.addEventListener("formio:userTokenRefreshed", (e) => {
+  console.log("User token updated, expires at:", e.detail.expiresAt);
+  // Optionally update your application's token storage
+  updateTokenInBackend(e.detail.expiresAt);
+});
+```
+
+### Complete Integration Example
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Initial setup
+viewer.formId = "your-form-id";
+viewer.authToken = "your-auth-token";
+viewer.load();
+
+// Set up user token refresh cycle
+viewer.addEventListener("formio:userTokenExpiring", async (e) => {
+  try {
+    // Refresh token from your OIDC/OAuth provider
+    const newToken = await refreshUserAccessToken();
+    viewer.refreshUserToken({ token: newToken });
+  } catch (error) {
+    console.error("Token refresh failed:", error);
+    // Redirect to login or show error
+    window.location = "/login";
+  }
+});
+
+// Set initial user token
+viewer.refreshUserToken({ token: getCurrentUserToken() });
+```
+
+### Using User Tokens in Form Logic
+
+User tokens passed via `headers` or `refreshUserToken()` are available in Form.io's evalContext, allowing you to use them in:
+
+- **Conditional Logic**: Show/hide components based on user claims
+- **Calculated Values**: Pre-fill fields with user information
+- **Custom Validation**: Validate based on user context
+- **Advanced Logic**: Any custom JavaScript in Form.io components
+
+**Example Form.io JavaScript:**
+
+```javascript
+// Access user token claims in Form.io custom JavaScript
+if (headers && headers.Authorization) {
+  // Parse token or use token claims
+  const userClaims = parseTokenClaims(headers.Authorization);
+  value = userClaims.email || "";
+}
+
+// Or use token data if passed via token attribute
+if (token && token.email) {
+  value = token.email;
+}
+```
+
+### Integration with Host Application Token Refresh
+
+**Important**: If your host application already has automatic user token refresh (e.g., using Keycloak.js, Auth0 SDK, or similar OIDC/OAuth libraries), you should integrate it with the component by calling `viewer.refreshUserToken()` whenever your application refreshes its user token.
+
+**Keycloak.js Integration Example:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Initialize Keycloak
+const keycloak = new Keycloak({
+  url: "https://your-keycloak-server.com",
+  realm: "your-realm",
+  clientId: "your-client-id",
+});
+
+// Initialize Keycloak and set up token refresh
+keycloak.init({ onLoad: "login-required" }).then((authenticated) => {
+  if (authenticated) {
+    // Set initial user token
+    viewer.refreshUserToken({ token: keycloak.token });
+    
+    // Listen for Keycloak token refresh
+    keycloak.onTokenExpired = () => {
+      keycloak.updateToken(30).then((refreshed) => {
+        if (refreshed) {
+          // Update component with refreshed token
+          viewer.refreshUserToken({ token: keycloak.token });
+        }
+      });
+    };
+    
+    // Set up automatic token refresh (Keycloak handles this)
+    setInterval(() => {
+      keycloak.updateToken(30).then((refreshed) => {
+        if (refreshed) {
+          viewer.refreshUserToken({ token: keycloak.token });
+        }
+      });
+    }, 60000); // Check every minute
+  }
+});
+```
+
+**Auth0 Integration Example:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Initialize Auth0
+const auth0 = new auth0.WebAuth({
+  domain: "your-domain.auth0.com",
+  clientID: "your-client-id",
+  redirectUri: window.location.origin,
+  responseType: "token id_token",
+  scope: "openid profile email",
+});
+
+// Handle authentication callback
+auth0.parseHash((err, authResult) => {
+  if (authResult && authResult.accessToken) {
+    // Set initial user token
+    viewer.refreshUserToken({ token: authResult.accessToken });
+    
+    // Set up token refresh
+    setupAuth0TokenRefresh(authResult.accessToken, authResult.expiresIn);
+  }
+});
+
+function setupAuth0TokenRefresh(accessToken, expiresIn) {
+  // Refresh token before it expires (refresh 5 minutes before expiry)
+  const refreshTime = (expiresIn - 300) * 1000; // Convert to milliseconds
+  
+  setTimeout(() => {
+    auth0.checkSession({}, (err, authResult) => {
+      if (!err && authResult) {
+        viewer.refreshUserToken({ token: authResult.accessToken });
+        // Schedule next refresh
+        setupAuth0TokenRefresh(authResult.accessToken, authResult.expiresIn);
+      }
+    });
+  }, refreshTime);
+}
+```
+
+**General Pattern for Any Token Refresh Library:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Your application's token refresh callback/hook
+function onUserTokenRefreshed(newToken) {
+  // Always update the component when your app refreshes the token
+  viewer.refreshUserToken({ token: newToken });
+}
+
+// Example: If your app has a global token refresh handler
+window.addEventListener("userTokenRefreshed", (e) => {
+  viewer.refreshUserToken({ token: e.detail.token });
+});
+
+// Example: If your app exposes a token refresh promise
+yourAuthLibrary.onTokenRefresh((newToken) => {
+  viewer.refreshUserToken({ token: newToken });
+});
+```
+
+### Security Notes
+
+- **Token Storage**: User tokens are stored in memory only, not persisted
+- **Automatic Cleanup**: Expiry timers are cleared when component is destroyed
+- **Header Passthrough**: User tokens are passed via `Authorization` header to CHEFS backend
+- **Token Refresh**: Your host application is responsible for refreshing user tokens before expiry
+- **No Automatic Refresh**: Unlike auth tokens, user tokens are NOT automatically refreshed by the component
+- **Integration Required**: If your host application has automatic token refresh, you must call `viewer.refreshUserToken()` whenever tokens are refreshed to keep the component synchronized
+
 ## Basic Integration
 
 ### Event Handling
@@ -717,12 +994,27 @@ The component provides a comprehensive event system for integration with support
 
 **Navigation Events:**
 
-- `formio:beforeNext` (cancelable, supports `waitUntil(promise)`, detail: `{ currentPage, submission }`) - Before moving to next page
-- `formio:beforePrev` (cancelable, supports `waitUntil(promise)`, detail: `{ currentPage, submission }`) - Before moving to previous page
+- `formio:beforeNext` (cancelable, supports `waitUntil(promise)`, detail: `{ currentPage, submission }`) - Before moving to next page. Can prevent navigation or perform async validation before allowing page change.
+- `formio:beforePrev` (cancelable, supports `waitUntil(promise)`, detail: `{ currentPage, submission }`) - Before moving to previous page. Can prevent navigation or perform async validation before allowing page change.
+
+**Host Data Events:**
+
+- `formio:hostDataChanged` (detail: `{ hostData }`) - When host data is updated via `setHostData()`
+
+**Print Events:**
+
+- `formio:beforePrint` (cancelable, supports `waitUntil(promise)`, detail: `{ submissionId, isDraft }`) - Before print/PDF generation begins
+- `formio:printDone` (detail: `{ submissionId, isDraft }`) - When print/PDF generation completes successfully
+
+**Host Submission Events:**
+
+- `formio:hostSubmit` (cancelable, supports `waitUntil(promise)`, detail: `{ data, submission, formId, formName, timestamp, isDraft }`) - Emitted when `submit-mode` is `host` or `none` after validation passes. Host can call `preventDefault()` to prevent auto read-only display (in `host` mode, submissions only).
 
 **Authentication Events:**
 
 - `formio:authTokenRefreshed` (detail: `{ authToken, oldToken }`) - When auth token is refreshed
+- `formio:userTokenRefreshed` (detail: `{ expiresAt }`) - When user token is updated via `refreshUserToken()`
+- `formio:userTokenExpiring` (detail: `{ expiresAt }`) - When user token is about to expire (configurable buffer, default 60s)
 
 **Asset Loading Events:**
 
@@ -864,6 +1156,84 @@ viewer.addEventListener("formio:error", (e) => {
   }
 });
 
+// Handle user token expiry
+viewer.addEventListener("formio:userTokenExpiring", async (e) => {
+  console.log("User token expiring at:", e.detail.expiresAt);
+  try {
+    const newToken = await refreshUserAccessToken();
+    viewer.refreshUserToken({ token: newToken });
+  } catch (error) {
+    console.error("Failed to refresh user token:", error);
+    // Redirect to login or show error
+    window.location = "/login";
+  }
+});
+
+// Handle user token refresh
+viewer.addEventListener("formio:userTokenRefreshed", (e) => {
+  console.log("User token refreshed, expires at:", e.detail.expiresAt);
+  // Optionally update your application's token storage
+});
+
+// Handle host data changes
+viewer.addEventListener("formio:hostDataChanged", (e) => {
+  console.log("Host data updated:", e.detail.hostData);
+  // React to host data updates if needed
+});
+
+// Handle print events
+viewer.addEventListener("formio:beforePrint", (e) => {
+  console.log("About to print:", e.detail);
+  // Can cancel print or perform async operations
+  // e.preventDefault(); // Cancel print
+  // e.detail.waitUntil(asyncOperation()); // Wait for async operation
+});
+
+viewer.addEventListener("formio:printDone", (e) => {
+  console.log("Print completed:", e.detail);
+  // Handle successful print
+});
+
+// Handle host-controlled submission (when submit-mode="host" or "none")
+viewer.addEventListener("formio:hostSubmit", async (e) => {
+  const { data, submission, formId, formName, timestamp, isDraft } = e.detail;
+  
+  if (isDraft) {
+    // Handle draft save in your application
+    await saveDraftToYourBackend(data);
+  } else {
+    // Handle final submission in your application
+    await saveSubmissionToYourBackend(data);
+    
+    // Optionally prevent auto read-only display (host mode only)
+    // e.preventDefault();
+  }
+});
+
+// Handle page navigation control
+viewer.addEventListener("formio:beforeNext", async (e) => {
+  const { currentPage, submission } = e.detail;
+  
+  // Validate current page before allowing navigation
+  if (!validateCurrentPage(submission)) {
+    e.preventDefault();
+    showError("Please complete all required fields");
+    return;
+  }
+  
+  // Async validation before navigation
+  e.detail.waitUntil(
+    validatePageWithServer(submission)
+      .then((isValid) => isValid)
+      .catch(() => false)
+  );
+});
+
+viewer.addEventListener("formio:beforePrev", (e) => {
+  // Can prevent going back if needed
+  // e.preventDefault();
+});
+
 // Manual token refresh example
 async function refreshTokenManually() {
   const viewer = document.querySelector("chefs-form-viewer");
@@ -926,23 +1296,201 @@ When using the simplified embed script, you can provide advanced configuration v
     // Set token and user objects
     token: { sub: "user123", roles: ["admin"], email: "user@example.com" },
     user: { name: "John Doe", department: "IT" },
+    
+    // Set headers (including Authorization header for user tokens)
+    headers: {
+      "Authorization": "Bearer user-token-from-your-idp",
+      "X-Custom-Header": "custom-value"
+    },
+    
+    // Set host data for Form.io evalContext
+    hostData: {
+      departments: ["IT", "HR", "Finance"],
+      maxItems: 10,
+      config: { allowEdit: true }
+    },
+    
+    // Set submit mode
+    submitMode: "host", // 'chefs' | 'host' | 'none'
 
     // Before hook - modify configuration before loading
     before: function (element, params) {
       console.log("About to load form:", params);
       element.isolateStyles = true;
+      
+      // Set submit mode programmatically
+      element.submitMode = "host";
+      
+      // Set print configuration
+      element.printButtonKey = "print";
+      element.printEventName = "printDocument";
     },
 
     // After hook - add event listeners after form loads
     after: function (element, formioInstance) {
+      // Handle submission events
       element.addEventListener("formio:submitDone", function (e) {
         alert("Form submitted successfully!");
         window.location = "/thank-you";
+      });
+      
+      // Handle host-controlled submission (when submit-mode="host" or "none")
+      element.addEventListener("formio:hostSubmit", async function (e) {
+        const { data, isDraft } = e.detail;
+        if (isDraft) {
+          await saveDraftToBackend(data);
+        } else {
+          await saveSubmissionToBackend(data);
+        }
+      });
+      
+      // Set up user token refresh
+      element.addEventListener("formio:userTokenExpiring", async function (e) {
+        const newToken = await refreshUserAccessToken();
+        element.refreshUserToken({ token: newToken });
+      });
+      
+      // Initial user token setup
+      element.refreshUserToken({ token: getCurrentUserToken() });
+      
+      // Update host data dynamically
+      element.addEventListener("formio:ready", async function () {
+        const freshData = await fetchLookupData();
+        element.setHostData({ lookupTables: freshData });
+      });
+      
+      // Handle print events
+      element.addEventListener("formio:beforePrint", function (e) {
+        console.log("Printing:", e.detail);
+      });
+      
+      element.addEventListener("formio:printDone", function (e) {
+        console.log("Print completed:", e.detail);
       });
     },
   };
 </script>
 <script src="https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-embed.min.js?form-id=YOUR_FORM_ID&api-key=YOUR_API_KEY"></script>
+```
+
+**Complete Configuration Example:**
+
+```html
+<script>
+  window.ChefsViewerConfig = {
+    // User context for Form.io evalContext
+    token: {
+      sub: "user123",
+      roles: ["admin", "form-user"],
+      email: "user@example.com"
+    },
+    user: {
+      name: "John Doe",
+      department: "IT",
+      idpUserId: "123456"
+    },
+    
+    // Headers for Form.io evalContext (including user token)
+    headers: {
+      "Authorization": "Bearer " + getCurrentUserToken(),
+      "X-Custom-Header": "value"
+    },
+    
+    // Host data for Form.io evalContext
+    hostData: {
+      departments: ["IT", "HR", "Finance"],
+      maxItems: 10,
+      businessRules: {
+        allowEdit: true,
+        requireApproval: false
+      }
+    },
+    
+    // Submit mode configuration
+    submitMode: "host",
+    
+    // Before hook
+    before: function (element, params) {
+      // Configure element before loading
+      element.isolateStyles = true;
+      element.debug = true;
+    },
+    
+    // After hook
+    after: function (element, formioInstance) {
+      // Set up all event handlers
+      setupEventHandlers(element);
+      
+      // Set up user token refresh cycle
+      setupUserTokenRefresh(element);
+      
+      // Set up host data updates
+      setupHostDataUpdates(element);
+    },
+    
+    // Metadata callback
+    onMetadataLoaded: function (metadata) {
+      document.title = metadata.formName || "Form";
+      console.log("Form loaded:", metadata.formName);
+    }
+  };
+  
+  function setupEventHandlers(element) {
+    // Host submission handler
+    element.addEventListener("formio:hostSubmit", async function (e) {
+      const { data, isDraft } = e.detail;
+      try {
+        if (isDraft) {
+          await saveDraft(data);
+        } else {
+          await saveSubmission(data);
+        }
+      } catch (error) {
+        e.preventDefault();
+        showError("Failed to save: " + error.message);
+      }
+    });
+    
+    // Print handlers
+    element.addEventListener("formio:beforePrint", function (e) {
+      logPrintEvent(e.detail);
+    });
+    
+    element.addEventListener("formio:printDone", function (e) {
+      showMessage("Print started successfully");
+    });
+  }
+  
+  function setupUserTokenRefresh(element) {
+    element.addEventListener("formio:userTokenExpiring", async function (e) {
+      try {
+        const newToken = await refreshUserAccessToken();
+        element.refreshUserToken({ token: newToken });
+      } catch (error) {
+        console.error("Token refresh failed:", error);
+        window.location = "/login";
+      }
+    });
+    
+    // Initial token setup
+    element.refreshUserToken({ token: getCurrentUserToken() });
+  }
+  
+  function setupHostDataUpdates(element) {
+    element.addEventListener("formio:ready", async function () {
+      // Fetch and update host data
+      const lookupData = await fetchLookupTables();
+      element.setHostData({ lookupTables: lookupData });
+      
+      // Set up periodic updates
+      setInterval(async function () {
+        const freshData = await fetchFreshData();
+        element.setHostData({ freshData });
+      }, 60000);
+    });
+  }
+</script>
+<script src="https://submit.digital.gov.bc.ca/app/embed/chefs-form-viewer-embed.min.js?form-id=YOUR_FORM_ID&auth-token=YOUR_AUTH_TOKEN"></script>
 ```
 
 #### Using Token and User in Form.io JavaScript
@@ -994,6 +1542,165 @@ if (token.roles.includes("manager") && user.department === "HR") {
   user='{"name":"John Doe","department":"IT","idpUserId":"123456"}'
 ></chefs-form-viewer>
 ```
+
+### Host Data
+
+The `host-data` attribute and `setHostData()` method allow you to pass arbitrary data from your host application to Form.io's evalContext, making it available as `host` in all Form.io custom JavaScript. This is useful for providing lookup tables, configuration objects, datasets, or any structured data that form components need to access.
+
+**Why Use Host Data?**
+
+- **Dynamic Lookup Tables**: Provide dropdown options or validation rules from your backend
+- **Configuration Objects**: Pass form-specific settings or business rules
+- **External Datasets**: Include data from other systems that form logic needs
+- **Runtime Updates**: Update form behavior without reloading the form
+
+**Setting Host Data via Attribute:**
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-auth-token"
+  host-data='{"departments":["IT","HR","Finance"],"maxItems":10,"config":{"allowEdit":true}}'
+></chefs-form-viewer>
+```
+
+**Setting Host Data Programmatically:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Set initial host data
+viewer.setHostData({
+  departments: ["IT", "HR", "Finance"],
+  maxItems: 10,
+  config: {
+    allowEdit: true,
+  },
+});
+
+// Update host data dynamically (shallow merge by default)
+viewer.setHostData({
+  maxItems: 20, // Updates maxItems
+  newField: "value", // Adds newField
+});
+
+// Replace all host data
+viewer.setHostData(
+  {
+    freshData: "new value",
+  },
+  { replace: true }
+);
+
+// Get current host data
+const currentData = viewer.getHostData();
+console.log(currentData); // { freshData: "new value" }
+```
+
+**Using Host Data in Form.io JavaScript:**
+
+Host data is available in Form.io's evalContext as `host`:
+
+```javascript
+// Access host data in Form.io custom JavaScript
+if (host && host.departments) {
+  // Use departments array for dropdown options
+  return host.departments;
+}
+
+// Access nested properties
+if (host && host.config && host.config.allowEdit) {
+  show = true;
+}
+
+// Use for calculated values
+if (host && host.maxItems) {
+  if (data.items && data.items.length > host.maxItems) {
+    return "Maximum " + host.maxItems + " items allowed";
+  }
+}
+```
+
+**Dynamic Updates Example:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Load form with initial data
+viewer.setHostData({
+  departments: [],
+  loading: true,
+});
+
+// Fetch data from your backend
+fetch("/api/departments")
+  .then((res) => res.json())
+  .then((departments) => {
+    // Update host data with fetched results
+    viewer.setHostData({
+      departments: departments,
+      loading: false,
+    });
+  });
+
+// Listen for host data changes
+viewer.addEventListener("formio:hostDataChanged", (e) => {
+  console.log("Host data updated:", e.detail.hostData);
+  // React to changes if needed (e.g., update UI, trigger form refresh)
+});
+```
+
+**Complete Integration Example:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Initial setup
+viewer.formId = "your-form-id";
+viewer.authToken = "your-auth-token";
+
+// Set initial host data
+viewer.setHostData({
+  userPreferences: getUserPreferences(),
+  businessRules: getBusinessRules(),
+});
+
+// Load form
+viewer.load();
+
+// Update host data after form loads (e.g., from async operations)
+viewer.addEventListener("formio:ready", async () => {
+  // Fetch additional data
+  const lookupData = await fetchLookupTables();
+  viewer.setHostData({ lookupTables: lookupData });
+
+  // Update periodically
+  setInterval(async () => {
+    const freshData = await fetchFreshData();
+    viewer.setHostData({ freshData });
+  }, 60000); // Every minute
+});
+```
+
+**Event: `formio:hostDataChanged`**
+
+Fired whenever host data is updated via `setHostData()`:
+
+```javascript
+viewer.addEventListener("formio:hostDataChanged", (e) => {
+  const { hostData } = e.detail;
+  console.log("Host data keys:", Object.keys(hostData));
+  // React to changes: update UI, trigger form logic, etc.
+});
+```
+
+**Best Practices:**
+
+- **Initial Setup**: Set host data before calling `load()` for best performance
+- **Shallow Merge**: Default behavior merges new data with existing data (use `{ replace: true }` to replace)
+- **Immutable Access**: `getHostData()` returns a shallow copy to prevent external mutation
+- **Event-Driven Updates**: Use `formio:hostDataChanged` event to react to updates
+- **Structured Data**: Keep host data well-structured for easy access in Form.io JavaScript
 
 ## Advanced Integration
 
@@ -1391,6 +2098,336 @@ viewer.addEventListener("formio:beforeAutoReload", (e) => {
 });
 ```
 
+### Submit Modes
+
+The `submit-mode` attribute controls how form submissions and draft saves are handled, allowing you to customize the submission workflow to match your application's needs.
+
+**Available Modes:**
+
+1. **`chefs` (default)**: Normal flow - submits/saves to CHEFS backend after validation
+2. **`host`**: After validation, emits `formio:hostSubmit` event for host to handle data. For submissions: automatically displays read-only unless host calls `preventDefault()`. For drafts: no auto read-only display.
+3. **`none`**: After validation, emits `formio:hostSubmit` but does NOT auto-display read-only. Host is fully responsible for what happens after (both submit and draft).
+
+**Mode Comparison:**
+
+| Mode | Validation | Backend Submit | Event Emitted | Auto Read-Only (Submit) | Auto Read-Only (Draft) |
+|------|------------|----------------|---------------|-------------------------|------------------------|
+| `chefs` | Yes | Yes | `formio:submitDone` | Yes | No |
+| `host` | Yes | No | `formio:hostSubmit` | Yes (unless prevented) | No |
+| `none` | Yes | No | `formio:hostSubmit` | No | No |
+
+**Using `submit-mode="chefs"` (Default):**
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-auth-token"
+  submit-mode="chefs"
+></chefs-form-viewer>
+```
+
+This is the standard behavior where forms submit directly to CHEFS backend. Use this when you want CHEFS to handle all submission logic.
+
+**Using `submit-mode="host"`:**
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-auth-token"
+  submit-mode="host"
+></chefs-form-viewer>
+```
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+viewer.addEventListener("formio:hostSubmit", async (e) => {
+  const { data, submission, formId, formName, timestamp, isDraft } = e.detail;
+
+  if (isDraft) {
+    // Handle draft save in your backend
+    await saveDraftToYourBackend({
+      formId,
+      data,
+      timestamp,
+    });
+    // No auto read-only display for drafts
+  } else {
+    // Handle final submission in your backend
+    const result = await saveSubmissionToYourBackend({
+      formId,
+      data,
+      timestamp,
+    });
+
+    // Optionally prevent auto read-only display
+    // e.preventDefault();
+
+    // Or handle success yourself
+    // e.preventDefault();
+    // window.location = `/success?submission=${result.id}`;
+  }
+});
+```
+
+**Using `submit-mode="none"`:**
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-auth-token"
+  submit-mode="none"
+></chefs-form-viewer>
+```
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+viewer.addEventListener("formio:hostSubmit", async (e) => {
+  const { data, submission, formId, formName, timestamp, isDraft } = e.detail;
+
+  // Host has full control - no auto read-only display
+  if (isDraft) {
+    await saveDraftToYourBackend({ formId, data, timestamp });
+    showMessage("Draft saved successfully");
+  } else {
+    const result = await saveSubmissionToYourBackend({ formId, data, timestamp });
+    
+    // Handle success - redirect, show message, etc.
+    window.location = `/success?submission=${result.id}`;
+  }
+});
+```
+
+**Event: `formio:hostSubmit`**
+
+Emitted when `submit-mode` is `host` or `none` after validation passes:
+
+- **Cancelable**: Yes (use `e.preventDefault()`)
+- **Supports `waitUntil`**: Yes (for async operations)
+- **Detail**: `{ data, submission, formId, formName, timestamp, isDraft }`
+
+**Event Detail Properties:**
+
+- `data` (Object): The form submission data
+- `submission` (Object): Full submission object including metadata
+- `formId` (string): The form identifier
+- `formName` (string): The form name
+- `timestamp` (string): ISO timestamp of submission
+- `isDraft` (boolean): `true` for draft saves, `false` for final submissions
+
+**Complete Example: Host-Controlled Submission**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Configure for host-controlled submission
+viewer.formId = "your-form-id";
+viewer.authToken = "your-auth-token";
+viewer.submitMode = "host";
+viewer.load();
+
+// Handle host submission
+viewer.addEventListener("formio:hostSubmit", async (e) => {
+  const { data, submission, formId, formName, timestamp, isDraft } = e.detail;
+
+  try {
+    if (isDraft) {
+      // Save draft to your backend
+      const draftId = await saveDraft({
+        formId,
+        data,
+        timestamp,
+      });
+      console.log("Draft saved:", draftId);
+      // No auto read-only display for drafts
+    } else {
+      // Validate with your backend before saving
+      const isValid = await validateWithYourBackend(data);
+      if (!isValid) {
+        e.preventDefault();
+        showError("Validation failed");
+        return;
+      }
+
+      // Save submission to your backend
+      const submissionId = await saveSubmission({
+        formId,
+        data,
+        timestamp,
+      });
+
+      // Optionally prevent auto read-only and redirect
+      e.preventDefault();
+      window.location = `/submissions/${submissionId}`;
+    }
+  } catch (error) {
+    e.preventDefault();
+    showError("Failed to save: " + error.message);
+  }
+});
+```
+
+**When to Use Each Mode:**
+
+- **`chefs`**: Use when you want CHEFS to handle all submission logic and storage. Best for simple integrations.
+- **`host`**: Use when you need to save submissions to your own backend but want CHEFS-like read-only confirmation. Good for hybrid workflows.
+- **`none`**: Use when you need complete control over post-submission behavior. Best for complex custom workflows.
+
+### Print Functionality
+
+The component provides print/PDF generation capabilities that allow users to print form submissions or draft data. The print functionality can be triggered via a Form.io Action button or programmatically.
+
+**Print Button Configuration:**
+
+The component automatically keeps the print button enabled even when the form is rendered as read-only, allowing users to print submitted data. Configure the print button using these attributes:
+
+- `print-button-key`: Form.io component key for the print Action button (default: `print`)
+- `print-event-name`: Form.io Event action name that triggers printing (default: `printDocument`)
+
+**Setting Up Print Button in Form.io:**
+
+1. Add an Action button component to your form in CHEFS form designer
+2. Set the component key to match your `print-button-key` (default: `print`)
+3. Configure the button's Event action to match your `print-event-name` (default: `printDocument`)
+4. The component will automatically handle the print functionality
+
+**Using Print via HTML:**
+
+```html
+<chefs-form-viewer
+  form-id="your-form-id"
+  auth-token="your-auth-token"
+  print-button-key="print"
+  print-event-name="printDocument"
+></chefs-form-viewer>
+```
+
+**Programmatic Print:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Print current draft data
+await viewer.print();
+
+// Print with options
+await viewer.print({
+  trigger: "manual", // 'manual' | 'formioEvent'
+});
+```
+
+**Print Behavior:**
+
+- **With `submission-id`**: Prints the stored submission from CHEFS backend
+- **Without `submission-id`**: Prints current draft data from the form instance
+- **Read-Only Mode**: Print button remains enabled even when form is read-only
+
+**Print Events:**
+
+**`formio:beforePrint`** - Fired before print/PDF generation begins:
+
+- **Cancelable**: Yes (use `e.preventDefault()`)
+- **Supports `waitUntil`**: Yes (for async operations)
+- **Detail**: `{ submissionId, isDraft }`
+
+**`formio:printDone`** - Fired when print/PDF generation completes successfully:
+
+- **Detail**: `{ submissionId, isDraft }`
+
+**Complete Print Integration Example:**
+
+```javascript
+const viewer = document.querySelector("chefs-form-viewer");
+
+// Configure print button
+viewer.printButtonKey = "print";
+viewer.printEventName = "printDocument";
+
+// Handle before print
+viewer.addEventListener("formio:beforePrint", (e) => {
+  const { submissionId, isDraft } = e.detail;
+  
+  console.log("Printing:", isDraft ? "draft" : "submission", submissionId);
+  
+  // Can cancel print
+  // e.preventDefault();
+  
+  // Can perform async operations
+  // e.detail.waitUntil(asyncOperation());
+});
+
+// Handle print completion
+viewer.addEventListener("formio:printDone", (e) => {
+  const { submissionId, isDraft } = e.detail;
+  console.log("Print completed:", isDraft ? "draft" : "submission", submissionId);
+  
+  // Optionally show success message
+  showMessage("Print started successfully");
+});
+
+// Programmatic print
+async function printForm() {
+  try {
+    await viewer.print();
+  } catch (error) {
+    console.error("Print failed:", error);
+    showError("Failed to print form");
+  }
+}
+
+// Print button in your UI
+document.getElementById("print-btn").addEventListener("click", printForm);
+```
+
+**Print Endpoints:**
+
+The component uses these backend endpoints for print generation:
+
+- **Submission Print**: `GET /webcomponents/v1/print/:formId/submission/:submissionId/print`
+- **Draft Print**: `GET /webcomponents/v1/print/:formId/print`
+
+Both endpoints require **CHEFS API authentication** (via `auth-token` attribute, sent as `X-Chefs-Gateway-Token` header) and return PDF data that the browser can print or download. Note: This is authentication for the web component's access to CHEFS APIs, not user authentication from your host application.
+
+**Print Button in Read-Only Mode:**
+
+When a form is rendered as read-only (after submission or when `read-only` attribute is set), the print button remains enabled. This allows users to print submitted data even though the form cannot be edited.
+
+**Custom Print Handling:**
+
+```javascript
+viewer.addEventListener("formio:beforePrint", async (e) => {
+  const { submissionId, isDraft } = e.detail;
+  
+  // Custom validation before print
+  if (!canUserPrint(submissionId)) {
+    e.preventDefault();
+    showError("You don't have permission to print this form");
+    return;
+  }
+  
+  // Log print event to analytics
+  await logPrintEvent({
+    submissionId,
+    isDraft,
+    timestamp: new Date().toISOString(),
+  });
+  
+  // Allow print to proceed
+});
+```
+
+**Error Handling:**
+
+```javascript
+viewer.addEventListener("formio:error", (e) => {
+  if (e.detail.error && e.detail.error.includes("print")) {
+    console.error("Print error:", e.detail.error);
+    showError("Failed to generate print. Please try again.");
+  }
+});
+```
+
 ### Code Generator and Demos
 
 **Embed Code Generator**
@@ -1491,6 +2528,11 @@ window.CHEFS_VIEWER_DEBUG = true;
 - `GET /webcomponents/v1/form-viewer/:formId/schema` → Returns `{ form, schema }` for published forms
 - `POST /webcomponents/v1/form-viewer/:formId/submit` → Creates new submission
 - `GET /webcomponents/v1/form-viewer/:formId/submission/:submissionId` → Loads existing submission
+
+**Print Operations:**
+
+- `GET /webcomponents/v1/print/:formId/submission/:submissionId/print` → Generates PDF for stored submission
+- `GET /webcomponents/v1/print/:formId/print` → Generates PDF for current draft data
 
 **Asset Serving:**
 
