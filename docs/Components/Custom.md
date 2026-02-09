@@ -17,6 +17,7 @@
 - [Custom Validation](Custom-Validation)  
 - [Digital Signature](Digital-signature)
 - [Using Signature Component with CDOGS HTML Templates](Signature-outside-form)
+- [Look up submitter information](Lookup-Submitter)
 
 ## Look and Feel
 - [Adding new base layers to map component](Adding-new-base-layers-to-map-component)
