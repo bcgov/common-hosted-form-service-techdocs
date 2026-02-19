@@ -77,6 +77,11 @@ The Edit Grid replicates a table-like structure when it comes to the capture and
 
 ![Edit grid](images/edit_grid.png)
 
+Note: For all form components you place inside the Edit Grid, you must enable table view in each component.
+
+<img width="599" height="172" alt="TableView" src="https://github.com/user-attachments/assets/c4853b6b-2a4f-4fb1-9452-ea44179a986c" />
+
+
 <!-- **[Back to top](#top)** -->
 
 ***
