@@ -6,6 +6,17 @@
 
 [Common Hosted Form Service (CHEFS)](https://submit.digital.gov.bc.ca/app/) is a web-based application for creating web forms and managing collected data
 
+## Two Types of CHEFS
+
+### What is Personal CHEFS?
+
+Personal CHEFS is self-serve version of CHEFS where individual BC Gov staff and contractors with IDIR can create and manage online forms for their own work. It is best suited for small teams, pilot projects, or single-form use cases. In Personal CHEFS, forms are owned and managed at the individual user level.
+### What is Enterprise CHEFS?
+
+Enterprise CHEFS is multi-tenanted version of CHEFS designed for program-wide or initiative-wide usage. Instead of forms being tied to individuals, they are owned at the Tenant level, allowing programs to control an entire library of forms, and manage access at scale. Enterprise CHEFS enables broader governance, better security for sensitive programs, and more consistent management of high-impact digital services.
+
+[Learn more about Enterprise CHEFS](Enterprise-CHEFS/index)
+
 <details>
   <summary><strong>Getting started and support</strong></summary>
 

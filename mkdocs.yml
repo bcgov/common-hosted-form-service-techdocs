@@ -23,6 +23,12 @@ nav:
       - Form Management: Capabilities/Form-Management.md
       - Data Management: Capabilities/Data-Management.md
       - Architecture & State Management: Capabilities/Architecture.md
+  - Enterprise CHEFS:
+      - Overview: Enterprise-CHEFS/index.md
+      - Introduction to CSTAR: Enterprise-CHEFS/Introduction-to-CSTAR.md
+      - Features and Use Cases: Enterprise-CHEFS/Features-and-Use-Cases.md
+      - Tenant Switcher (Top Right): Enterprise-CHEFS/Tenant-Switcher.md
+      - Roles and Groups: Enterprise-CHEFS/Roles-and-Groups.md
   - Components:
       - Form Builder: Components/Form-Builder.md
       - Custom: Components/Custom.md
