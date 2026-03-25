@@ -14,7 +14,7 @@ For getting started with core CHEFS features, see the [Getting started and suppo
 ## In this section
 
 - [Introduction to CSTAR](Introduction-to-CSTAR)
-- [Features and use cases of Enterprise of CHEFS](Features-and-Use-Cases.md)
+- [Features and use cases of Enterprise of CHEFS](Features-and-Use-Cases-eCHEFS.md)
 
 ***
 [Terms of Use](../About/Terms-of-Use) | [Privacy](../About/Privacy) | [Security](../About/Security) | [Service Agreement](../About/Service-Agreement) | [Accessibility](../Capabilities/Accessibility)
