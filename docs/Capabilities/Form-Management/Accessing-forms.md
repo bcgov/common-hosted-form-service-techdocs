@@ -11,6 +11,7 @@ You can choose from three levels of access for your form – **Public**, **Log-i
 
 Each option comes with its own set of considerations.
 
+![img](images/chefs-form-access-fig5.png)
 ![img](images/chefs-form-access-fig1.png)
 
 **Public (anonymous)**
@@ -25,7 +26,7 @@ Some of the limitations when choosing Public as your access level are:
 
 **Log-in required**
 
-Requiring a submitter to log in limits your form to anyone with a **BC Services Card**, **Basic BCeID**, **Business BCeID** or **IDIR** username and password. 
+Requiring a submitter to log in limits your form to anyone with a **BC Services Card**, **Basic BCeID**, **Business BCeID**, **IDIR**, or **IDIR MFA** username and password. 
 
 Requiring a log in enables several features for submitters. 
 Submitters can:
@@ -35,7 +36,7 @@ Submitters can:
 * Review all their previous submissions. 
 
 Requiring a login has some limitations:
-* You can only select one of: BC Services Card, Basic BCeID, Business BCeID or IDIR; you cannot allow multiple.
+* You can only select one of: BC Services Card, Basic BCeID, Business BCeID, or IDIR; you cannot allow multiple. **Note:** IDIR and IDIR MFA are treated as the same identity group - enabling IDIR also grants access to IDIR MFA users.
 * Users often find getting a BCeID confusing.
 
 **Specific Team Members**
@@ -118,5 +119,32 @@ Additional forms created for a similar purpose and similar customer base may not
 > **Note:** BCeID and BC Services Card Account users cannot be added to your form as an administrator. See [Managing admin teams](Managing-admin-teams) for more details on how to add administrators to your form.
 
 <!-- **[Back to top](#top)** -->
+
+## IDIR with Multi-Factor Authentication (IDIR MFA)
+
+CHEFS supports two IDIR login methods that are treated as equivalent for form access purposes:
+
+| Login method | Identity provider hint | When to use |
+|---|---|---|
+| **IDIR** | `idir` | Standard IDIR login (no MFA required) |
+| **IDIR MFA** | `azureidir` | IDIR login enforced through Azure AD with MFA |
+
+### For form designers
+
+When you configure a form to allow **IDIR** access, both IDIR and IDIR MFA users can submit and manage the form. You do not need to add IDIR MFA as a separate identity provider - the two are treated as the same identity group under the canonical code `idir`.
+
+![img](images/chefs-form-access-fig1.png)
+
+### For form users
+
+When accessing a form or logging in from the CHEFS home page, you will see two IDIR login buttons:
+
+- **IDIR** — redirects to the standard IDIR Keycloak login
+- **IDIR MFA** — redirects to the Azure AD IDIR login, which enforces multi-factor authentication
+
+![img](images/idir-mfa-and-idir-as-option.png)
+
+Choose **IDIR MFA** for stronger authentication. Both options give you the same access to IDIR-enabled forms.
+
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
