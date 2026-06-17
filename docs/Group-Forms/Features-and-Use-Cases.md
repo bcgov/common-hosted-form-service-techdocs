@@ -1,20 +1,20 @@
 [Home](../index) > [Group Forms](index) > **Features and Use Cases**
 ***
 
-## Landing Page
+## About Page
 
-When a user navigates to the Group Forms URL, they land on a page that introduces both Group Forms and CSTAR. The page provides two entry points:
+Users log in to CHEFS as usual — there is no separate landing page or gateway for Group Forms. After logging in, the user lands on the **About** page, which now includes a promo box introducing multi-tenancy:
 
-- **Go to CHEFS** — takes the user into the forms application
-- **Go to CSTAR** — takes the user to the CSTAR tenant management portal
+- A summary of who Group Forms is a good fit for (managing many forms across programs or environments, multiple administrators or reviewers, frequent staffing changes, centralized access management, or adopting other connected services such as Notify)
+- A **Login to CSTAR to Get Started** button for team leads and administrators who want to set up a tenant
 
-The landing page also displays an important notice for BCeID users: BCeID users must log in to CSTAR before using Group Forms. This step ensures their account is discoverable by tenant admins who need to add them to a tenant or group.
+![Screenshot: About page showing the CHEFS multi-tenancy promo box and Login to CSTAR to Get Started button](images/group-forms-landing.png)
 
-![Screenshot: Group Forms landing page showing Go to CHEFS and Go to CSTAR buttons](images/group-forms-landing.png)
+> **Note:** Group Forms is only available to IDIR-authenticated users. BCeID users are not supported for tenants and cannot use Group Forms.
 
 ## Logging In
 
-Users log in by clicking the **Login** button on the landing page. Authentication is done through IDIR. Once authenticated, an API call is made to CSTAR to fetch all tenants the logged-in user belongs to.
+Users authenticate into CHEFS through IDIR or BCeID as usual. Once authenticated, an API call is made to CSTAR to fetch all tenants the logged-in user belongs to.
 
 ---
 
@@ -119,8 +119,8 @@ In Group Forms, a `form_admin` can enable the **Share draft with form group memb
 
 The following summarizes the full flow from login to form access:
 
-1. Navigate to the Group Forms URL and land on the introductory landing page.
-2. Click **Login** and authenticate via IDIR.
+1. Log in to CHEFS as usual via IDIR.
+2. Land on the About page, which lands in My Forms mode and shows the multi-tenancy promo box.
 3. CSTAR is called to retrieve all tenants the user belongs to.
 4. If the user belongs to no tenants, the experience is identical to My Forms.
 5. If the user belongs to one or more tenants, those tenants appear in the top-right dropdown under Group Forms, with My Forms as the default.

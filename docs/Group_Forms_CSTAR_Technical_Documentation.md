@@ -12,17 +12,17 @@ In the Group Forms model, forms are organized under tenants. A tenant is a dedic
 
 ---
 
-## 2. Landing Page and Login
+## 2. About Page and Login
 
-### 2.1 Landing Page
+### 2.1 About Page
 
-When a user navigates to the Group Forms URL, they land on a page that introduces both Group Forms and CSTAR. The page provides two entry points: **Go to CHEFS**, which takes the user into the forms application, and **Go to CSTAR**, which takes the user to the CSTAR tenant management portal.
+There is no separate landing page or gateway for Group Forms. Users log in to CHEFS as usual and land on the About page, which now includes a promo box introducing CHEFS multi-tenancy support — describing who it's a good fit for (managing many forms across programs or environments, multiple administrators or reviewers, frequent staffing changes, centralized access management, or adopting other connected services such as Notify) and providing a **Login to CSTAR to Get Started** button for team leads and administrators who want to set up a tenant.
 
-The landing page also displays an important notice for BCeID users: BCeID users must log in to CSTAR before using Group Forms. This step ensures that their account is discoverable by tenant admins, who need to find and add them to a tenant or group.
+Group Forms is only available to IDIR-authenticated users. BCeID users are not supported for tenants and cannot use Group Forms.
 
 ### 2.2 Logging In
 
-Users log in by clicking the Login button on the landing page. Authentication is done through IDIR. Form designers, form owners, and other users who need to create or manage forms must use their IDIR credentials to log in.
+Users authenticate into CHEFS through IDIR or BCeID as usual. Form designers, form owners, and other users who need to create or manage forms within a tenant must use IDIR credentials, since BCeID users are not supported for tenants.
 
 Once authenticated, an API call is made to CSTAR to fetch all tenants the logged-in user belongs to. This happens silently in the background immediately after login.
 
@@ -122,8 +122,8 @@ The following features are currently disabled in Group Forms and are planned for
 
 The following summarizes the full flow from login to form access:
 
-1. The user navigates to the Group Forms URL and lands on the introductory landing page.
-2. The user clicks Login and authenticates via IDIR.
+1. The user logs in to CHEFS as usual via IDIR.
+2. The user lands on the About page in My Forms mode, which shows the multi-tenancy promo box.
 3. After login, an API call is made to CSTAR to retrieve all tenants the user belongs to.
 4. If the user belongs to no tenants, the application behaves identically to My Forms.
 5. If the user belongs to one or more tenants, those tenants appear in the top-right dropdown under Group Forms. My Forms is selected by default.
