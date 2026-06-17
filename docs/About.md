@@ -8,14 +8,14 @@
 
 ## Two Types of CHEFS
 
-### What is Personal CHEFS?
+### What is My Forms?
 
-Personal CHEFS is self-serve version of CHEFS where individual BC Gov staff and contractors with IDIR can create and manage online forms for their own work. It is best suited for small teams, pilot projects, or single-form use cases. In Personal CHEFS, forms are owned and managed at the individual user level.
-### What is Enterprise CHEFS?
+My Forms is the self-serve mode of CHEFS where individual BC Gov staff and contractors with IDIR can create and manage online forms for their own work. It is best suited for small teams, pilot projects, or single-form use cases. In My Forms, forms are owned and managed at the individual user level.
+### What is Group Forms?
 
-Enterprise CHEFS is multi-tenanted version of CHEFS designed for program-wide or initiative-wide usage. Instead of forms being tied to individuals, they are owned at the Tenant level, allowing programs to control an entire library of forms, and manage access at scale. Enterprise CHEFS enables broader governance, better security for sensitive programs, and more consistent management of high-impact digital services.
+Group Forms is the multi-tenanted mode of CHEFS designed for program-wide or initiative-wide usage. Instead of forms being tied to individuals, they are owned at the Tenant level, allowing programs to control an entire library of forms, and manage access at scale. Group Forms enables broader governance, better security for sensitive programs, and more consistent management of high-impact digital services.
 
-[Learn more about Enterprise CHEFS](Enterprise-CHEFS/index)
+[Learn more about Group Forms](Group-Forms/index)
 
 <details>
   <summary><strong>Getting started and support</strong></summary>

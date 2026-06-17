@@ -1,16 +1,16 @@
-[Home](../index) > [Enterprise CHEFS](index) > **Features and Use Cases**
+[Home](../index) > [Group Forms](index) > **Features and Use Cases**
 ***
 
 ## Landing Page
 
-When a user navigates to the Enterprise CHEFS URL, they land on a page that introduces both Enterprise CHEFS and CSTAR. The page provides two entry points:
+When a user navigates to the Group Forms URL, they land on a page that introduces both Group Forms and CSTAR. The page provides two entry points:
 
 - **Go to CHEFS** — takes the user into the forms application
 - **Go to CSTAR** — takes the user to the CSTAR tenant management portal
 
-The landing page also displays an important notice for BCeID users: BCeID users must log in to CSTAR before using Enterprise CHEFS. This step ensures their account is discoverable by tenant admins who need to add them to a tenant or group.
+The landing page also displays an important notice for BCeID users: BCeID users must log in to CSTAR before using Group Forms. This step ensures their account is discoverable by tenant admins who need to add them to a tenant or group.
 
-![Screenshot: Enterprise CHEFS landing page showing Go to CHEFS and Go to CSTAR buttons](images/enterprise-chefs-landing.png)
+![Screenshot: Group Forms landing page showing Go to CHEFS and Go to CSTAR buttons](images/group-forms-landing.png)
 
 ## Logging In
 
@@ -18,30 +18,30 @@ Users log in by clicking the **Login** button on the landing page. Authenticatio
 
 ---
 
-## Personal CHEFS vs Enterprise CHEFS
+## My Forms vs Group Forms
 
-### Default State — Personal CHEFS
+### Default State — My Forms
 
-After logging in, the application defaults to Personal CHEFS. The top navigation bar displays **Common Hosted Forms | Personal**, and the top-right dropdown shows Personal CHEFS selected. This is the classic CHEFS experience — forms are personal and not associated with any tenant.
+After logging in, the application defaults to My Forms. The top-right dropdown shows **My Forms** selected, with no tenant context banner. This is the classic CHEFS experience — forms are personal and not associated with any tenant.
 
-If the user does not belong to any tenants in CSTAR, the experience is identical to Personal CHEFS with no visible difference.
+If the user does not belong to any tenants in CSTAR, the experience is identical to My Forms with no visible difference.
 
-![Screenshot: Navigation bar showing Personal CHEFS mode](images/personal-chefs.png)
+![Screenshot: Navigation bar showing My Forms mode](images/my-forms.png)
 
 ### Switching to a Tenant
 
-If the user belongs to one or more tenants, those tenants are listed in the top-right dropdown alongside Personal CHEFS. Clicking a tenant switches the application to that tenant's context.
+If the user belongs to one or more tenants, those tenants are listed in the top-right dropdown under a **Group Forms** section, below the default **My Forms** option. Clicking a tenant switches the application to that tenant's context.
 
 When a tenant is selected:
 
-- The navigation bar updates to show **Common Hosted Forms | Enterprise**
-- The Forms page now lists forms that belong to the selected tenant
+- A context banner showing the tenant's name appears below the navigation bar
+- The Forms page title updates to **Group Forms**, and now lists forms that belong to the selected tenant
 - CSTAR is called in the background to retrieve the user's groups and roles within that tenant
 - The user's access to individual forms is determined by which groups have been assigned to each form
 
-![Screenshot: Top-right tenant dropdown with tenant list](images/tenant-dropdown.png)
+![Screenshot: Top-right tenant dropdown with My Forms and Group Forms sections](images/tenant-dropdown.png)
 
-![Screenshot: Navigation bar showing Enterprise CHEFS mode after tenant selection](images/enterprise-chefs.png)
+![Screenshot: Navigation bar and context banner showing Group Forms mode after tenant selection](images/group-forms.png)
 ---
 
 ## Roles and Permissions
@@ -52,7 +52,7 @@ Roles come from CSTAR groups, and access to a form is determined by group associ
 
 ### Available Roles
 
-The following roles are available in Enterprise CHEFS, from most restricted to most permissive:
+The following roles are available in Group Forms, from most restricted to most permissive:
 
 | Role | Description |
 | --- | --- |
@@ -72,7 +72,7 @@ The following roles are available in Enterprise CHEFS, from most restricted to m
 
 ### Forms Page
 
-Once a tenant is selected, the Forms page displays all forms belonging to that tenant. The available actions on each form depend on the roles the user holds through their group assignments on that form. Just like Personal CHEFS, based on the user's roles, different pages and links will be made available on the individual form page.
+Once a tenant is selected, the Forms page displays all forms belonging to that tenant. The available actions on each form depend on the roles the user holds through their group assignments on that form. Just like My Forms, based on the user's roles, different pages and links will be made available on the individual form page.
 
 ### Group Management
 
@@ -91,7 +91,7 @@ Groups can be moved between panels using the transfer control between them. Clic
 
 ### Form Access — Specific Groups
 
-When configuring a form, a `form_admin` can control who can access it using the **Form Access** setting. In Enterprise CHEFS, in addition to the standard access options available in Personal CHEFS, the form can be restricted to **Specific Groups**.
+When configuring a form, a `form_admin` can control who can access it using the **Form Access** setting. In Group Forms, in addition to the standard access options available in My Forms, the form can be restricted to **Specific Groups**.
 
 The available options are:
 
@@ -107,7 +107,7 @@ When **Specific Groups** is selected, a user's effective roles on the form are a
 
 CHEFS allows submitters to save a draft and share it with other users so they can collaborate on completing the form before final submission. See [Sharing a Submission](https://developer.gov.bc.ca/docs/default/component/chefs-techdocs/Capabilities/Form-Management/Sharing-a-submission/) for general draft sharing behaviour.
 
-In Enterprise CHEFS, a `form_admin` can enable the **Share draft with form group members only** setting under **Form Functionality**. When this is enabled, a submitter can only share their draft with users who are members of one of the form's authorized groups. Attempting to share with a user outside those groups will show an error.
+In Group Forms, a `form_admin` can enable the **Share draft with form group members only** setting under **Form Functionality**. When this is enabled, a submitter can only share their draft with users who are members of one of the form's authorized groups. Attempting to share with a user outside those groups will show an error.
 
 ![Screenshot: Form Functionality settings with Share draft with form group members only checked](images/specific-group-members-only-draft-sharing.png)
 
@@ -119,12 +119,12 @@ In Enterprise CHEFS, a `form_admin` can enable the **Share draft with form group
 
 The following summarizes the full flow from login to form access:
 
-1. Navigate to the Enterprise CHEFS URL and land on the introductory landing page.
+1. Navigate to the Group Forms URL and land on the introductory landing page.
 2. Click **Login** and authenticate via IDIR.
 3. CSTAR is called to retrieve all tenants the user belongs to.
-4. If the user belongs to no tenants, the experience is identical to Personal CHEFS.
-5. If the user belongs to one or more tenants, those tenants appear in the top-right dropdown with Personal CHEFS as the default.
-6. Select a tenant — the application switches to Enterprise mode for that tenant.
+4. If the user belongs to no tenants, the experience is identical to My Forms.
+5. If the user belongs to one or more tenants, those tenants appear in the top-right dropdown under Group Forms, with My Forms as the default.
+6. Select a tenant — the application switches to Group Forms mode for that tenant.
 7. CSTAR is called to retrieve the user's groups and roles within that tenant.
 8. The tenant's forms are displayed; the user can access forms where at least one of their groups has been assigned, with roles derived from those group assignments.
 9. The user can submit, review, approve, manage, or design forms depending on their roles on each specific form.
