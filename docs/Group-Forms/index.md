@@ -13,7 +13,7 @@ For getting started with core CHEFS features, see the [Getting started and suppo
 
 ## In this section
 
-- [Introduction to CSTAR](Introduction-to-CSTAR)
+- [Introduction to CSTAR](Introduction-to-CSTAR.md)
 - [Features and use cases of Group Forms](Features-and-Use-Cases.md)
 
 ***
