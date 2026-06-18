@@ -12,6 +12,8 @@ CSTAR (Connected Services Team Access and Roles) provides a centralized way to:
 - organize users into groups
 - assign and maintain role-based access
 
+For more details on CSTAR, see the [CSTAR documentation](https://bcgov.github.io/tenant-management-system/docs/overview/what-is-cstar/).
+
 ## What is a Tenant?
 
 A tenant represents a program area, initiative, or service team. In Group Forms, forms are scoped to the tenant context instead of an individual-only context.
@@ -38,7 +40,7 @@ Group Forms must be added as a connected service to a tenant in CSTAR before rol
 
 ## Adding Users and Creating Groups
 
-Once a tenant is approved and active, the tenant owner can add users to the tenant and create groups. Groups are used to organize users and assign roles from Group Forms. Users added to a group inherit all roles assigned to that group.
+Once a tenant is approved and active, the tenant owner can add users to the tenant and create groups. Groups are used to organize users and assign service roles from Group Forms. Users added to a group inherit all roles assigned to that group.
 
 ![HTML Tag: div, CSS Class: alert alert-primary](images/add-new-user-to-group.png)
 
