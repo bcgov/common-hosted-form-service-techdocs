@@ -14,7 +14,7 @@ Users log in to CHEFS as usual — there is no separate landing page or gateway 
 
 ## Logging In
 
-Users authenticate into CHEFS through IDIR or BCeID as usual. Once authenticated, an API call is made to CSTAR to fetch all tenants the logged-in user belongs to.
+Only users with an IDIR or Business BCeID account who have been granted access through CSTAR can access and manage Group Forms. Basic BCeID users may still be able to log in and submit forms if they have been granted **Form Submitter** access.
 
 ---
 
@@ -22,9 +22,9 @@ Users authenticate into CHEFS through IDIR or BCeID as usual. Once authenticated
 
 ### Default State — My Forms
 
-After logging in, the application defaults to My Forms. The top-right dropdown shows **My Forms** selected, with no tenant context banner. This is the classic CHEFS experience — forms are personal and not associated with any tenant.
+After logging in, users are taken to the **My Forms** page by default. **My Forms** will appear as the selected option in the drop-down menu at the top of the page. This is the classic CHEFS experience — forms are personal and not associated with any tenant.
 
-If the user does not belong to any tenants in CSTAR, the experience is identical to My Forms with no visible difference.
+If a user is not a member of a CSTAR tenant, their CHEFS experience will remain unchanged.
 
 ![Screenshot: Navigation bar showing My Forms mode](images/my-forms.png)
 
@@ -34,10 +34,10 @@ If the user belongs to one or more tenants, those tenants are listed in the top-
 
 When a tenant is selected:
 
-- A context banner showing the tenant's name appears below the navigation bar
+- A context yellow banner showing the tenant's name appears below the navigation bar
 - The Forms page title updates to **Group Forms**, and now lists forms that belong to the selected tenant
 - CSTAR is called in the background to retrieve the user's groups and roles within that tenant
-- The user's access to individual forms is determined by which groups have been assigned to each form
+- Users can only access forms that have been assigned to one of their groups by a Form Administrator.
 
 ![Screenshot: Top-right tenant dropdown with My Forms and Group Forms sections](images/tenant-dropdown.png)
 
@@ -46,9 +46,25 @@ When a tenant is selected:
 
 ## Roles and Permissions
 
-Roles come from CSTAR groups, and access to a form is determined by group association. A user must belong to a group that has been assigned to a specific form in order to access it. Their roles on that form are derived from the roles assigned to those matching groups in CSTAR.
+Roles and Permissions (How Access Works)
 
-**Example:** A user in a `reviewers` group will only see and access forms that have the `reviewers` group assigned to them. Their role on those forms is whatever role the `reviewers` group holds in CSTAR (e.g. `submission_reviewer`).
+Access to forms is managed through CSTAR groups and roles.
+
+The groups you belong to determine which forms you can access. The role assigned to your group determines what actions you can perform on those forms.
+
+**Example:**
+
+A Flu Shot Clinic may create the following groups:
+
+Clinic Managers — Form Administrator
+Nurses — Form Submitter
+Clerks — Submission Reviewer
+Senior Nurses — Form Submitter
+
+A Group Form called “Patient Intake” may be assigned to the **Nurses** and **Clerks** groups. Users in those groups can submit responses to the form and review submissions, respectively.
+
+Another Group Form called “Adverse Event Follow-up” may be assigned only to the **Senior Nurses** group. Users in that Group can access and submit responses to that form.
+
 
 ### Available Roles
 
@@ -62,36 +78,42 @@ The following roles are available in Group Forms, from most restricted to most p
 | `form_designer` | Can create and design forms. |
 | `form_admin` | Full access — create forms, manage settings, and view all submissions. |
 
-> **Note:** Roles are scoped per-form based on group association. A user only has access to forms where at least one of their CSTAR groups has been assigned by a `form_admin`.
+> **Note:** You will only see forms that have been made available to the groups you belong to. If you cannot find a form, you may not have access to it.
 
-> Note: Only users with the `form_admin` role can create new forms within a tenant.
+> Note: Only users with the Form Administrator role can create new forms within a tenant.
 
 ---
 
 ## Managing Forms
 
-### Forms Page
-
-Once a tenant is selected, the Forms page displays all forms belonging to that tenant. The available actions on each form depend on the roles the user holds through their group assignments on that form. Just like My Forms, based on the user's roles, different pages and links will be made available on the individual form page.
+Once a tenant is selected, the **Group Forms** page displays all forms belonging to that tenant. The forms available to you, and the actions you can perform on them, depend on your assigned role and group membership.
 
 ### Group Management
 
-Users with the `form_admin` role can manage which CSTAR groups are associated with a specific form. This is done through the **Group Management** page, accessible from within the form's management options.
+Form Administrators can control which groups have access to a form.
 
-The page presents two panels:
+While users may belong to the same tenant, not all forms need to be available to everyone. The **Group Management** page allows Form Administrators to grant access to specific forms for specific groups.
 
-- **Available Groups** — all groups defined in CSTAR for the tenant that are not yet assigned to this form
-- **Assigned Groups** — groups currently associated with this form
+When a Form Administrator creates a new Group Form, the form is automatically assigned to one of the CSTAR groups they belong to. No other CSTAR groups are granted access by default
 
-Groups can be moved between panels using the transfer control between them. Click **Save** to apply the changes.
+This helps ensure that access is granted intentionally and reduces the risk of making forms available to users who do not require access.
+
+If additional CSTAR groups need access to the form, the Form Administrator can add them through the **Group Management** page, where there are two lists:
+
+**Available Groups** – groups that do not currently have access to the form.
+**Assigned Groups** – groups that currently have access to the form.
+
+Move a group from **Available Groups** to **Assigned Groups** to grant access to the form. To remove access, move it back to **Available Groups**.
+
+Select **Save** to apply your changes.
 
 ![Screenshot: Group Management page showing Available Groups and Assigned Groups panels for a form](images/form-group-association.png)
 
-> **Note:** Only users with the `form_admin` role can assign or remove groups from a form.
+> **Note:** Only users with the Form Administrator role can assign or remove groups from a form.
 
 ### Form Access — Specific Groups
 
-When configuring a form, a `form_admin` can control who can access it using the **Form Access** setting. In Group Forms, in addition to the standard access options available in My Forms, the form can be restricted to **Specific Groups**.
+When configuring a form, a `Form Administrator` can control who can access it using the **Form Access** setting. In Group Forms, in addition to the standard access options available in My Forms, the form can be restricted to **Specific Groups**.
 
 The available options are:
 
@@ -101,13 +123,16 @@ The available options are:
 
 When **Specific Groups** is selected, a user's effective roles on the form are aggregated from all their CSTAR groups that are assigned to that form. For example, if a user belongs to both a `reviewers` group and a `submitters` group, and both are assigned to the form, they will hold the combined roles of both groups on that form.
 
+> **Tip:**: Use CSTAR groups to manage access for broad teams or roles within your tenant, such as Administrators, Designers, Reviewers, or Program Staff.
+If a specific form requires more restricted access, create a dedicated CSTAR group and assign that group to the form. This helps keep your group structure simple while allowing access to be managed at the form level when needed.
+
 ![Screenshot: Form Access dropdown showing Specific Groups option selected](images/form-access-specific-groups.png)
 
 ### Draft Sharing with Specific Groups
 
 CHEFS allows submitters to save a draft and share it with other users so they can collaborate on completing the form before final submission. See [Sharing a Submission](https://developer.gov.bc.ca/docs/default/component/chefs-techdocs/Capabilities/Form-Management/Sharing-a-submission/) for general draft sharing behaviour.
 
-In Group Forms, a `form_admin` can enable the **Share draft with form group members only** setting under **Form Functionality**. When this is enabled, a submitter can only share their draft with users who are members of one of the form's authorized groups. Attempting to share with a user outside those groups will show an error.
+In Group Forms, Form Administrators can limit draft sharing to users who belong to groups that have access to the form. If a user tries to share a draft with someone outside those groups, an error message will be displayed.
 
 ![Screenshot: Form Functionality settings with Share draft with form group members only checked](images/specific-group-members-only-draft-sharing.png)
 
@@ -117,17 +142,16 @@ In Group Forms, a `form_admin` can enable the **Share draft with form group memb
 
 ## End-to-End Flow
 
-The following summarizes the full flow from login to form access:
+The following summarizes how users access and work with Group Forms:
 
-1. Log in to CHEFS as usual via IDIR.
-2. Land on the About page, which lands in My Forms mode and shows the multi-tenancy promo box.
-3. CSTAR is called to retrieve all tenants the user belongs to.
-4. If the user belongs to no tenants, the experience is identical to My Forms.
-5. If the user belongs to one or more tenants, those tenants appear in the top-right dropdown under Group Forms, with My Forms as the default.
-6. Select a tenant — the application switches to Group Forms mode for that tenant.
-7. CSTAR is called to retrieve the user's groups and roles within that tenant.
-8. The tenant's forms are displayed; the user can access forms where at least one of their groups has been assigned, with roles derived from those group assignments.
-9. The user can submit, review, approve, manage, or design forms depending on their roles on each specific form.
+1. Sign in to CHEFS using your IDIR account.
+2. After signing in, you will land on the About page.
+3. If you are not a member of any tenants in CSTAR, your CHEFS experience will remain unchanged.
+4. If you belong to one or more tenants, those tenants will appear in the drop down list at the top of the screen.
+5. Select a tenant to access the forms available within that tenant.
+6. The forms you can see depend on the groups you belong to and the access assigned to those groups.
+7. Your role determines what actions you can perform on each form, such as submitting, reviewing, approving, designing, or managing forms.
+8. If you do not see a form that you expect to access, the form may not have been assigned to one of your groups.
 
 ***
 [Terms of Use](../About/Terms-of-Use) | [Privacy](../About/Privacy) | [Security](../About/Security) | [Service Agreement](../About/Service-Agreement) | [Accessibility](../Capabilities/Accessibility)
