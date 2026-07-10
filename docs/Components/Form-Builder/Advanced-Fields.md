@@ -390,8 +390,7 @@ Inline Layout: Displays the option values horizontally
 ## Button
 <!-- **[Back to top](#top)** -->
 
-Buttons can be added to perform various actions within the form. The most obvious function of the Button component is the Submission action. However, you can also utilize the Button component to trigger events associated with workflow logic, reset field data, authenticate to an OAuth provider, and more. 
-In addition to functionality, the button component offers many settings to change the style and theme of the component
+Buttons can be added to perform various actions within the form. The most obvious function of the Button component is the Submission action. 
 
 <details>
   <summary><strong>Unique Settings</strong></summary>
@@ -400,18 +399,13 @@ Action: The functionality that executes when the button is clicked. Click the ev
 
 Submit - Submits the form to the back-end server
 
-Save In State - This button action works alongside the Save In State workflow and facilitates a 'Save as Draft' workflow. 
-
-Inheritently the action will bypass validation giving the submission a different state.
+Save In State - Deprecated. 
 
 Reset - Reset all fields on the form back to their pristine state
 
 Event - Triggers an 'event' on the form which is usually correlated to application logic or form workflow logic
 
-Oauth - Opens an OAuth authentication popup. This will only work after it has been assigned to an [OAuth Action](https://github.com/userguide/form-building/actions#oauth). 
-
-See the [OAuth guide](https://github.com/developers/integrations/auth/oauth) for more information on how to set up OAuth in your project.
-Post to URL - 
+Oauth - Deprecated.
 
 Custom - Write custom code to fire 
 
