@@ -52,7 +52,7 @@ The teams that develop and support the CHEFS software are funded through the OCI
 #### View the history of Uptime for various services: 
 > [CHEFS Uptime Statistics Dashboard](https://stats.uptimerobot.com/vpjoZUE6YE)  
 > [OCP Silver Cluster Uptime](https://status.developer.gov.bc.ca/statuspage/platform-service-status-page/1388599?start=20220101&end=20221231)       
-> [Keycloak Login service on Gold Cluster](https://uptime.com/statuspage/bcgov-sso-gold/1391029)  
+> [Keycloak Login service on Gold Cluster](https://status.loginproxy.gov.bc.ca/)  
 
 
 ***
