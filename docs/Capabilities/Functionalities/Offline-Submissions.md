@@ -3,7 +3,9 @@
 
 # Offline Submissions
 
-> **Experimental feature.** Behaviour and wording may change as the feature matures.
+> **Offline Submissions is currently only available by request.** If you would like to enable Offline Submissions for your form, please contact us on the [CHEFS Teams channel](https://teams.microsoft.com/l/channel/19%3A34b9d4b4deb54eebaa9be8bc1ccf02f7%40thread.tacv2/CHEFS%20(Exchange%20Lab%20Team)?groupId=bef8086f-20c7-43a4-bd07-29ce764e818c&tenantId=6fdb5200-3d0d-4a8a-b036-d3685e359adc).
+>
+> Please be aware that this is an experimental feature and although it has been tested as functional, it may not behave as expected in all scenarios yet. Your input is more than welcome to help us improve it.
 
 ## Overview
 
