@@ -26,7 +26,7 @@ Some of the limitations when choosing Public as your access level are:
 
 **Log-in required**
 
-Requiring a submitter to log in limits your form to anyone with a **BC Services Card**, **Business BCeID**, **IDIR**, or **IDIR MFA** username and password. 
+Requiring a submitter to log in limits your form to anyone with a **BC Services Card**, **Basic BCeID**, **Business BCeID**, **IDIR**, or **IDIR MFA** username and password. 
 
 Requiring a log in enables several features for submitters. 
 Submitters can:
@@ -36,7 +36,7 @@ Submitters can:
 * Review all their previous submissions. 
 
 Requiring a login has some limitations:
-* **Note:** IDIR and IDIR MFA are treated as the same identity group - enabling IDIR also grants access to IDIR MFA users.
+* You can only select one of: BC Services Card, Basic BCeID, Business BCeID, or IDIR; you cannot allow multiple. **Note:** IDIR and IDIR MFA are treated as the same identity group - enabling IDIR also grants access to IDIR MFA users.
 * Users often find getting a BCeID confusing.
 
 **Specific Team Members**
@@ -76,7 +76,7 @@ To update access to an existing form:
 ## To use Log in Required with BCeID
 <!-- **[Back to top](#top)** -->
 
-If you decide to use **Business BCeID**, **BC Services Card** for your form access, you must notify the Identity Information Management (IDIM) team by email (IDIM.Consulting@gov.bc.ca). They need to know which forms are using the BCeID service and allocate appropriate resources. 
+If you decide to use **Basic BCeID** or **Business BCeID** for your form access, you must notify the Identity Information Management (IDIM) team by email (IDIM.Consulting@gov.bc.ca). They need to know which forms are using the BCeID service and allocate appropriate resources. 
 You should provide them the following in your notification:
 
 * Program area or initiative that owns the CHEFS form
