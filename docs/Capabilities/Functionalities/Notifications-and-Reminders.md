@@ -14,6 +14,20 @@ Form owners have the option to set up email notifications for team members whene
 
 Team members' email addresses must be manually added to the appropriate field to receive notifications.
 
+<!--
+TODO (CCP-4720): the noti1.png screenshot below is out of date.
+
+The "After Submission" panel now shows four checkboxes instead of two:
+  - Enable Submission URL Sharing
+  - Show the Confirmation ID   (renamed from "Show the submission confirmation details")
+  - Let submitters email themselves a copy of their submission
+  - Hide submission contents on the success page
+
+Recapture noti1.png on the current build. This section's copy is fine as-is
+(it is only about the team-notification email, which is unchanged), but the
+screenshot must be updated so it does not show the old checkbox label. See
+docs/Capabilities/Form-Management/Sharing-a-submission.md for the new options.
+-->
 ![image](images/noti1.png)
 
 
@@ -24,8 +38,15 @@ Team members' email addresses must be manually added to the appropriate field to
 ## Submission Confirmation for Submitters
 <!-- **[Back to top](#top)** -->
 
-After successfully submitting a form, submitters have the option to send themselves a confirmation email that serves as a receipt for their records. This option becomes available after the user submits the form.
+After successfully submitting a form, submitters have the option to send themselves a confirmation email that serves as a receipt for their records. This option is shown on the success page when the form owner has left **"Let submitters email themselves a copy of their submission"** on in Form Settings. On a Public form where **"Enable Submission URL Sharing"** has been turned off, the email-receipt option is automatically off (see [Sharing a submission](Sharing-a-submission) for the interaction rules).
 
+<!--
+TODO (CCP-4720): confirm noti2.png is still representative of the default
+success page. On a brand-new form (all four "After Submission" checkboxes at
+their defaults) the button, Confirmation ID, and submission contents should
+still render as shown, so the screenshot is likely fine. Recapture only if
+the success-page layout has changed cosmetically on the current build.
+-->
 ![image](images/noti2.png)
 
 
