@@ -46,6 +46,19 @@ This should add another expandable panel section where Event Subscription parame
 
 External application behind that above configured API could then retrieve and process the submission or form events like publish and unpublish of form using the [CHEFS APIs](https://submit.digital.gov.bc.ca/app/api/v1/docs). External application can get access to any of their form's data by [generating API Keys.](https://developer.gov.bc.ca/docs/default/component/chefs-techdocs/Capabilities/Data-Management/Generating-API-keys/)
 
+## Important - Submit button requirement
+
+Event Subscription only fires the `eventSubmission` event when the form's Submit
+button keeps its default **API Property Name** of `submit`.
+
+If you rename the Submit button's key in the Form Designer (Form Designer →
+Submit button → API Property Name), CHEFS can no longer detect that the
+submission was actually submitted, and the webhook will silently stop firing —
+no error is shown anywhere.
+
+**Before enabling Event Subscription, confirm your form's Submit button's API
+Property Name is `submit`.** If you've already renamed it, rename it
+back to `submit` for event subscription feature to work as expected.
 
 ***
 [Terms of Use](Terms-of-Use) | [Privacy](Privacy) | [Security](Security) | [Service Agreement](Service-Agreement) | [Accessibility](Accessibility)
