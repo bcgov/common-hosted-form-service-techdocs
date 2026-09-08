@@ -16,6 +16,7 @@
 * [Wide form layout](Wide-Form-Layout)
 * [Recall a submission](Recall-Submission)
 * [Offline submissions](Offline-Submissions) (Experimental)
+* [Submit to Email](Submit-to-Email) (Experimental)
 
 ## Notifications
 * [CHEFS Notifications and Reminders](Notifications-and-Reminders)
