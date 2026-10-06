@@ -60,18 +60,21 @@ If your form relies on any of the components above, plan your form so those fiel
 
 ## What submitters see while offline
 
-Once you enable the feature and the submitter loads the form, CHEFS adds a persistent connection status chip to the top of the page.
+Once you enable the feature and the submitter loads the form, CHEFS adds offline controls to the top of the page:
 
-- When online, the chip shows a green cloud icon and the label **ONLINE**.
-- When offline, the chip changes to a warning icon with the label **Offline**.
-- If any submissions are waiting on the device, a red count badge appears on the corner of the chip.
+- When the device goes offline, a white cloud icon appears in the header.
+- When submissions are waiting on the device, an outlined **OFFLINE SUBMISSIONS** button appears beside it with a red count badge. Clicking the button opens the saved list.
+- On narrow screens the button collapses to an icon-only button (with the count badge) and the standalone icon drops out, so only one control is shown.
 
-![ONLINE chip in the CHEFS header](images/offline-chip-online.png)
-![Offline chip in the CHEFS header with a red count badge showing queued submissions](images/offline-chip-offline.png)
+![Header offline controls: standalone cloud icon and OFFLINE SUBMISSIONS button with a red count badge](images/offline-chip-offline.png)
+
+CHEFS also raises a persistent notification banner while the device is offline on an offline-capable page, titled **"You are now offline"** with the message *"Form Submissions will be saved locally and sent to the server when you come back online."* The banner clears automatically when the device reconnects or the submitter navigates away.
+
+![Persistent "You are now offline" notification banner](images/offline-banner.png)
 
 While offline, some form controls change:
 
-- **View my Drafts / Submissions** and the multi-draft upload switch grey out; those pages need the server.
+- **View my Drafts / Submissions** is hidden and the multi-draft upload switch is disabled; those actions need the server.
 - **Print options**: Browser Print stays available. **Template Print** (CDOGS-rendered downloads) is disabled offline; it needs the server to render the template.
 - **Save as Draft** stays available; drafts are also saved on the device and sent later.
 - **Submit** works, but instead of posting to the server it opens the confirmation dialog below.
@@ -91,7 +94,7 @@ After saving, a toast confirms the entry was stored on the device and the form r
 
 ## Managing saved submissions
 
-Clicking the status chip opens the **Saved Submissions** list.
+Clicking the **OFFLINE SUBMISSIONS** button opens the **Saved Submissions** list.
 
 Each row shows:
 
@@ -114,7 +117,7 @@ Click the pencil icon on any row. The form reopens with the saved data pre-fille
 
 - Change the values you need to correct.
 - Click **Save** in the banner (or run through the submit flow) to overwrite the entry in place. The entry keeps its original save time and its place in the queue.
-- Click **Close Edit** to leave without changing anything.
+- Click **Return** to leave without changing anything.
 
 Sync is paused while an entry is being edited, so a queued send cannot overwrite your changes mid-edit.
 
