@@ -15,6 +15,7 @@ For getting started with core CHEFS features, see the [Getting started and suppo
 
 - [Introduction to CSTAR](Introduction-to-CSTAR.md)
 - [Features and use cases of Group Forms](Features-and-Use-Cases.md)
+- [Migrating a My Forms form to a tenant](Form-Migration.md)
 
 ***
 [Terms of Use](../About/Terms-of-Use) | [Privacy](../About/Privacy) | [Security](../About/Security) | [Service Agreement](../About/Service-Agreement) | [Accessibility](../Capabilities/Accessibility)
