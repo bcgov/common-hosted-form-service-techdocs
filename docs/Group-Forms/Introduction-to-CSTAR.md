@@ -1,4 +1,4 @@
-[Home](../index) > [Group Forms](index) > **Introduction to CSTAR**
+[Home](../index.md) > [Group Forms](index.md) > **Introduction to CSTAR**
 ***
 
 CSTAR is the access and role management application used with Group Forms and other connected services.

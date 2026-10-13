@@ -1,4 +1,4 @@
-[Home](../index) > [Group Forms](index) > **Form Migration**
+[Home](../index.md) > [Group Forms](index.md) > **Form Migration**
 ***
 
 Form migration moves an existing **My Forms** form into a **Group Forms** tenant. After migration, access to the form is managed through the tenant's CSTAR groups and roles instead of the form's team in CHEFS.

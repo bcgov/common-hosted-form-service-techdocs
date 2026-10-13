@@ -1,4 +1,4 @@
-[Home](../index) > [Group Forms](index) > **Features and Use Cases**
+[Home](../index.md) > [Group Forms](index.md) > **Features and Use Cases**
 ***
 
 ## About Page
