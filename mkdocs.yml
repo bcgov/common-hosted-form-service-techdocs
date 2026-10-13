@@ -27,6 +27,7 @@ nav:
       - Overview: Group-Forms/index.md
       - Introduction to CSTAR: Group-Forms/Introduction-to-CSTAR.md
       - Features and Use Cases: Group-Forms/Features-and-Use-Cases.md
+      - Form Migration: Group-Forms/Form-Migration.md
   - Components:
       - Form Builder: Components/Form-Builder.md
       - Custom: Components/Custom.md
