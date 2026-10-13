@@ -135,7 +135,7 @@ Migrated forms show a **Migrated** chip in the Group Forms list and on the form'
 
 ![Screenshot: Manage Form page of a migrated form with the Migrated chip tooltip](images/form-migration-migrated-chip.png)
 
-Because a migrated form's access is managed in CSTAR, its Manage page no longer shows the **Team Management** or **Migrate to Tenant** buttons.
+Because a migrated form's access is managed by groups, its Manage page shows a **Group Management** button in place of **Team Management**, and the **Migrate to Tenant** button is no longer shown.
 
 If you open a migrated form from an old link or bookmark while in My Forms, CHEFS switches you to the form's tenant and lets you know, as long as you belong to that tenant.
 
