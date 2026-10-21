@@ -17,7 +17,7 @@ Group Forms is the multi-tenanted mode of CHEFS designed for program-wide or ini
 
 [Learn more about Group Forms](Group-Forms/index)
 
-<details>
+<details id="getting-started-and-support">
   <summary><strong>Getting started and support</strong></summary>
 
 To start creating forms, you can [watch a series of short videos](https://www.youtube.com/playlist?list=PL9CV_8JBQHirsQAShw45PZeU1CkU88Q53) on how to build your first form, or follow our [Quick start guide](Quick-start-guide). For more advanced questions CHEFS, please review our:
